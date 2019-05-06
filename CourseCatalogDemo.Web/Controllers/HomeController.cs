@@ -13,6 +13,7 @@ namespace CourseCatalogDemo.Web.Controllers
             return View();
         }
 
+        [Route("about")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -20,6 +21,7 @@ namespace CourseCatalogDemo.Web.Controllers
             return View();
         }
 
+        [Route("contact")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

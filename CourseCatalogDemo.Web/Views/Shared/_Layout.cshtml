@@ -4,8 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <base href="/">
+    <link href="~/course-catalog/node_modules/devextreme/dist/css/dx.common.css" rel="stylesheet" />
+    <link href="~/course-catalog/node_modules/devextreme/dist/css/dx.light.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/modernizr")*@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,9 +23,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    <li>
+                        <a href="/contact">Contact</a>
+                    </li>
+                    <li>
+                        <a href="/catalog">Catalog</a>
+
+                    </li>
                 </ul>
             </div>
         </div>
@@ -35,8 +48,16 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
+
+<script type="text/javascript" src="~/src/course-catalog/runtime.js"></script>
+<script type="text/javascript" src="~/src/course-catalog/es2015-polyfills.js" nomodule></script>
+<script type="text/javascript" src="~/src/course-catalog/polyfills.js"></script>
+<script type="text/javascript" src="~/src/course-catalog/styles.js"></script>
+<script type="text/javascript" src="~/src/course-catalog/vendor.js"></script>
+<script type="text/javascript" src="~/src/course-catalog/main.js"></script>
+
+@RenderSection("scripts", required: false)
 </body>
 </html>
