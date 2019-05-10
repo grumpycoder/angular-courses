@@ -10,7 +10,8 @@ import {
   DxButtonModule,
   DxDataGridModule,
   DxBulletModule,
-  DxTemplateModule
+  DxTemplateModule,
+  DxListModule
 } from 'devextreme-angular';
 
 @NgModule({
@@ -20,7 +21,8 @@ import {
     DxButtonModule,
     DxDataGridModule,
     DxTemplateModule,
-    DxBulletModule
+    DxBulletModule,
+    DxListModule
   ],
   declarations: [AppComponent, NavBarComponent, CourseCatalogComponent, CourseAdminComponent],
   providers: [],
