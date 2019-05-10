@@ -3,22 +3,39 @@
     Course Catalog
   </div>
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
+    <h5 class="card-title">Course List</h5>
 
-    <table class="table">
-      <thead>
-        <tr>Course Code</tr>
-        <tr>Course Name</tr>
-        <tr>Description</tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let course of courses">
-          <td>{{course.courseCode}}</td>
-          <td>{{course.name}}</td>
-          <td>{{course.description}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <dx-data-grid
+      id="gridContainer"
+      [dataSource]="courses"
+      [remoteOperations]="false"
+      [allowColumnReordering]="true"
+      [rowAlternationEnabled]="true"
+      [showBorders]="true"
+      [height]="400"
+      [columns]="[
+        'courseCode',
+        'name',
+        'description',
+        'cipCode',
+        'beginServiceYear',
+        'endServiceYeaer',
+        'creditType',
+        'courseType',
+        'classType',
+        'subjectArea',
+        'status'
+      ]"
+    >
+      <dxo-scrolling mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true">
+      </dxo-pager>
+      <dxo-filter-row [visible]="true" [applyFilter]="currentFilter"></dxo-filter-row>
+      <dxo-header-filter [visible]="true"></dxo-header-filter>
+      <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+      <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+    </dx-data-grid>
   </div>
   <div class="card-footer text-muted">
     2 days ago

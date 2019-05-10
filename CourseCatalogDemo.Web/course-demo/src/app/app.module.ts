@@ -6,21 +6,24 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CourseCatalogComponent } from './course-catalog/course-catalog.component';
 import { CourseAdminComponent } from './course-admin/course-admin.component';
-import { CourseService } from './shared/course.service';
+import {
+  DxButtonModule,
+  DxDataGridModule,
+  DxBulletModule,
+  DxTemplateModule
+} from 'devextreme-angular';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavBarComponent,
-    CourseCatalogComponent,
-    CourseAdminComponent
-  ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DxButtonModule,
+    DxDataGridModule,
+    DxTemplateModule,
+    DxBulletModule
   ],
-  providers: [
-  ],
+  declarations: [AppComponent, NavBarComponent, CourseCatalogComponent, CourseAdminComponent],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

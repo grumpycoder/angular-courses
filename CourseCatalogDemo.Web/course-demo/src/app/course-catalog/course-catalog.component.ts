@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from '../shared/course.service';
+import { ICourse } from '../models/course';
 
 @Component({
   selector: 'app-course-catalog',
@@ -7,11 +8,16 @@ import { CourseService } from '../shared/course.service';
   styles: []
 })
 export class CourseCatalogComponent implements OnInit {
-  courses: any[];
+  courses: ICourse[];
+  currentFilter: any;
   constructor(private courseService: CourseService) {}
 
   ngOnInit() {
-    this.courses = this.courseService.getCourses();
-    console.log('courses', this.courses);
+    //this.courses = this.courseService.getCourses();
+    this.courses = this.courseService.getCoursesApi();
+  }
+
+  helloWorld() {
+    alert('Hello world!');
   }
 }

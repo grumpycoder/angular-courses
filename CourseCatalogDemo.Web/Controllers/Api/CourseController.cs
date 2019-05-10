@@ -23,7 +23,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         [HttpGet]
         public async Task<object> Get(DataSourceLoadOptions loadOptions)
         {
-            var list = await _context.CourseViews.Take(20).ToListAsync();
+            var list = await _context.CourseViews.ToListAsync();
 
             return Ok(DataSourceLoader.Load(list, loadOptions));
         }
