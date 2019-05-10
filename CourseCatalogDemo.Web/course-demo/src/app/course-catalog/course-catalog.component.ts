@@ -7,13 +7,11 @@ import { CourseService } from '../shared/course.service';
   styles: []
 })
 export class CourseCatalogComponent implements OnInit {
-  private courses: any[];
-  constructor(private courseService: CourseService) { }
+  courses: any[];
+  constructor(private courseService: CourseService) {}
 
   ngOnInit() {
     this.courses = this.courseService.getCourses();
     console.log('courses', this.courses);
-
   }
-
 }
