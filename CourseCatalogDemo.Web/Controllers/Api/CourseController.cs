@@ -4,6 +4,7 @@ using CourseCatalogDemo.Infrastructure;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -22,7 +23,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         [HttpGet]
         public async Task<object> Get(DataSourceLoadOptions loadOptions)
         {
-            var list = await _context.CourseViews.ToListAsync();
+            var list = await _context.CourseViews.Take(20).ToListAsync();
 
             return Ok(DataSourceLoader.Load(list, loadOptions));
         }

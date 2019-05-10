@@ -92,12 +92,31 @@
     rxjs "6.3.3"
     source-map "0.7.3"
 
+"@angular-devkit/core@7.3.9", "@angular-devkit/core@^7.1.4":
+  version "7.3.9"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-7.3.9.tgz#bef2aaa0be7219c546fb99ea0ba9dd3a6dcd288a"
+  integrity sha512-SaxD+nKFW3iCBKsxNR7+66J30EexW/y7tm8m5AvUH+GwSAgIj0ZYmRUzFEPggcaLVA4WnE/YWqIXZMJW5dT7gw==
+  dependencies:
+    ajv "6.9.1"
+    chokidar "2.0.4"
+    fast-json-stable-stringify "2.0.0"
+    rxjs "6.3.3"
+    source-map "0.7.3"
+
 "@angular-devkit/schematics@7.3.8":
   version "7.3.8"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-7.3.8.tgz#70bfc7876f7924ff53ab9310a00b62f20acf2f5c"
   integrity sha512-mvaKoORZIaW/h0VNZ3IQWP0qThRCZRX6869FNlzV0jlW0mhn07XbiIGHCGGSCDRxS7qJ0VbuIVnKXntF+iDeWw==
   dependencies:
     "@angular-devkit/core" "7.3.8"
+    rxjs "6.3.3"
+
+"@angular-devkit/schematics@7.3.9", "@angular-devkit/schematics@^7.1.4", "@angular-devkit/schematics@^7.2.2":
+  version "7.3.9"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-7.3.9.tgz#4fe7bc878b116b157a3adf00583c28c951215877"
+  integrity sha512-xzROGCYp7aQbeJ3V6YC0MND7wKEAdWqmm/GaCufEk0dDS8ZGe0sQhcM2oBRa2nQqGQNeThFIH51kx+FayrJP0w==
+  dependencies:
+    "@angular-devkit/core" "7.3.9"
     rxjs "6.3.3"
 
 "@angular/animations@~7.2.0":
@@ -303,6 +322,15 @@
   dependencies:
     "@angular-devkit/core" "7.3.8"
     "@angular-devkit/schematics" "7.3.8"
+    typescript "3.2.4"
+
+"@schematics/angular@^7.1.4":
+  version "7.3.9"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-7.3.9.tgz#f57baf1cd9588d4f1035974d06fd8f3d54df021a"
+  integrity sha512-B3lytFtFeYNLfWdlrIzvy3ulFRccD2/zkoL0734J+DAGfUz7vbysJ50RwYL46sQUcKdZdvb48ktfu1S8yooP6Q==
+  dependencies:
+    "@angular-devkit/core" "7.3.9"
+    "@angular-devkit/schematics" "7.3.9"
     typescript "3.2.4"
 
 "@schematics/update@0.13.8":
@@ -2049,6 +2077,24 @@ detect-node@^2.0.4:
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.4.tgz#014ee8f8f669c5c58023da64b8179c083a28c46c"
   integrity sha512-ZIzRpLJrOj7jjP2miAtgqIfmzbxa4ZOr5jJc601zklsfEx9oTzmmj2nVpIPRpNlRTIh8lc1kyViIY7BWSGNmKw==
 
+devextreme-angular@^18.2.8:
+  version "18.2.8"
+  resolved "https://registry.yarnpkg.com/devextreme-angular/-/devextreme-angular-18.2.8.tgz#57801102d31f338865e9b51a51d3cdebdf56e11b"
+  integrity sha512-793pPNDun7cQqRNsLUcKxUdw4poD6JvqGVjvAKgj9WbTGaIdPe87yH6F41YfnG7jjehMWJjHmMeFWJXTYyKVXg==
+  dependencies:
+    "@angular-devkit/schematics" "^7.2.2"
+    devextreme-schematics latest
+
+devextreme-schematics@latest:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/devextreme-schematics/-/devextreme-schematics-1.0.5.tgz#346962b158b95e2c5f017c1c1dc9377ac37feef6"
+  integrity sha512-6y1Hm2OxRuizZKygoWylvn5tp23MHOgiyvJWCOVsz8oDvQNz5HOwoc7Ogic5TFBx87u6KpV1tbVapP5RMbupfA==
+  dependencies:
+    "@angular-devkit/core" "^7.1.4"
+    "@angular-devkit/schematics" "^7.1.4"
+    "@schematics/angular" "^7.1.4"
+    rxjs "^6.3.3"
+
 di@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/di/-/di-0.0.1.tgz#806649326ceaa7caa3306d75d985ea2748ba913c"
@@ -3649,6 +3695,11 @@ jasminewd2@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.2.0.tgz#e37cf0b17f199cce23bea71b2039395246b4ec4e"
   integrity sha1-43zwsX8ZnM4jvqcbIDk5Uka07E4=
+
+jquery@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
+  integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
 
 js-base64@^2.1.8:
   version "2.5.1"
@@ -5676,6 +5727,13 @@ rxjs@^6.1.0:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.1.tgz#f7a005a9386361921b8524f38f54cbf80e5d08f4"
   integrity sha512-y0j31WJc83wPu31vS1VlAFW5JGrnGC+j+TtGAa1fRQphy48+fDYiDmX8tjGloToEsMkxnouOg/1IzXGKkJnZMg==
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^6.3.3:
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.2.tgz#2e35ce815cd46d84d02a209fb4e5921e051dbec7"
+  integrity sha512-HUb7j3kvb7p7eCUHE3FqjoDsC1xfZQ4AHFWfTKSpZ+sAhhz5X1WX0ZuUqWbzB2QhSLp3DoLUG+hMdEDKqWo2Zg==
   dependencies:
     tslib "^1.9.0"
 
