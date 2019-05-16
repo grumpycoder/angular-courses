@@ -4,7 +4,6 @@ using CourseCatalogDemo.Infrastructure;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -36,14 +35,14 @@ namespace CourseCatalogDemo.Web.Controllers.Api
             return Ok(dto);
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<object> Put(CourseEditDto dto)
         {
             var course = await _context.Courses.FindAsync(dto.Id);
 
             Mapper.Map(dto, course);
 
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return Ok(dto);
         }

@@ -13,19 +13,34 @@ import {
   DxTemplateModule,
   DxListModule
 } from 'devextreme-angular';
+import { HttpClientModule } from '@angular/common/http';
+import { CourseDetailComponent } from './course-admin/course-detail/course-detail.component';
+import { FormsModule } from '@angular/forms';
+import { CourseModule } from './courses/course.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
     DxButtonModule,
     DxDataGridModule,
     DxTemplateModule,
     DxBulletModule,
-    DxListModule
+    DxListModule,
+    CourseModule,
+    AppRoutingModule
   ],
-  declarations: [AppComponent, NavBarComponent, CourseCatalogComponent, CourseAdminComponent],
+  declarations: [
+    AppComponent,
+    NavBarComponent,
+    CourseCatalogComponent,
+    CourseAdminComponent,
+    CourseDetailComponent,
+    HomeComponent,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

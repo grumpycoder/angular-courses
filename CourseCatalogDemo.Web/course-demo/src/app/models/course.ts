@@ -4,6 +4,8 @@ export interface ICourse {
   name: string;
   description: string;
   cipCode: string;
+  beginServiceYearId: number;
+  endServiceYearId: number;
   beginServiceYear: number;
   endServiceYear: number;
   creditType: string;
@@ -11,4 +13,5 @@ export interface ICourse {
   classType: string;
   subjectArea: string;
   status: string;
+  creditTypeId?: number;
 }

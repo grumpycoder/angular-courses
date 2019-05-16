@@ -13,7 +13,7 @@ export class CourseCatalogComponent implements OnInit {
   constructor(private courseService: CourseService) {}
 
   ngOnInit() {
-    //this.courses = this.courseService.getCourses();
+    // this.courses = this.courseService.getCourses();
     this.courses = this.courseService.getCoursesApi();
   }
 

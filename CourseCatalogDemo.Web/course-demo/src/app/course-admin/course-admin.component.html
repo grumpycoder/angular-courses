@@ -1,24 +1,32 @@
-<h4>Course List</h4>
-<div class="col-md-4">
-  <dx-list
-    #list
-    [dataSource]="courses"
-    [height]="400"
-    [searchEnabled]="true"
-    selectionMode="single"
-    selectAllMode="page"
-    searchExpr="name"
-    searchMode="contains"
-    itemTemplate="data"
-  >
-    <div *dxTemplate="let item of 'data'">
-      <div>{{ item.id }} : {{ item.name }}</div>
-      <div>{{ item.courseCode }}</div>
-    </div>
-  </dx-list>
+<div class="row">
+  <div class="col-md-4">
+    <h4>Course List</h4>
+    <dx-list
+      #list
+      (onSelectionChanged)="onSelectionChanged($event)"
+      [dataSource]="courses"
+      [height]="400"
+      [searchEnabled]="true"
+      selectionMode="single"
+      selectAllMode="page"
+      searchExpr="courseCode"
+      searchMode="contains"
+      itemTemplate="data"
+    >
+      <div *dxTemplate="let item of 'data'">
+        <div>{{ item.id }} : {{ item.name }}</div>
+        <div>{{ item.courseCode }}</div>
+      </div>
+    </dx-list>
 
-  <div class="selected-data">
-    <span class="caption">Selected IDs:</span>
-    <span>{{ list.selectedItemKeys.join(', ') }}</span>
+    <div class="selected-data">
+      <span class="caption">Selected IDs:</span>
+      <span>{{ list.selectedItemKeys.join(', ') }}</span>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <h4>Course Details</h4>
+    <app-course-detail [selectedCourse]="selectedCourse" *ngIf="selectedCourse"></app-course-detail>
   </div>
 </div>
