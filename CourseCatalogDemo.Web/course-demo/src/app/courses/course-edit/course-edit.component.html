@@ -4,6 +4,11 @@
   </div>
 
   <div class="card-body">
+    <div class="wizard">
+      <a [routerLink]="['info']" routerLinkActive="active">Basic Information</a>
+      <a [routerLink]="['programs']" routerLinkActive="active">Programs</a>
+    </div>
+
     <router-outlet></router-outlet>
   </div>
 </div>

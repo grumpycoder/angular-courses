@@ -23,7 +23,8 @@ import { CourseEditProgramComponent } from './course-edit/course-edit-program.co
       {
         path: 'courses/:id/edit', component: CourseEditComponent, children: [
           { path: '', redirectTo: 'info', pathMatch: 'full' },
-          { path: 'info', component: CourseEditInfoComponent }
+          { path: 'info', component: CourseEditInfoComponent },
+          { path: 'programs', component: CourseEditProgramComponent }
         ]
       }
     ]),

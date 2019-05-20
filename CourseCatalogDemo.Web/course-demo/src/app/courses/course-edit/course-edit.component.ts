@@ -5,7 +5,7 @@ import { LookupService } from 'src/app/shared/lookup.service';
 
 @Component({
   templateUrl: './course-edit.component.html',
-  styles: []
+  styleUrls: ['./course-edit.component.css']
 })
 export class CourseEditComponent implements OnInit {
   pageTitle: string = 'Course Edit';
