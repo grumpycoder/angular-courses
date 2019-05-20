@@ -12,9 +12,10 @@ import {
 import { CourseEditInfoComponent } from './course-edit/course-edit-info.component';
 import { CourseEditComponent } from './course-edit/course-edit.component';
 import { SharedModule } from '../shared/shared.module';
+import { CourseEditProgramComponent } from './course-edit/course-edit-program.component';
 
 @NgModule({
-  declarations: [CourseListComponent, CourseEditInfoComponent, CourseEditComponent],
+  declarations: [CourseListComponent, CourseEditInfoComponent, CourseEditComponent, CourseEditProgramComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([

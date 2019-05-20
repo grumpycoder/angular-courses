@@ -8,36 +8,10 @@ import { LookupService } from 'src/app/shared/lookup.service';
   styles: []
 })
 export class CourseEditComponent implements OnInit {
-  pageTitle = 'Course Edit';
-  course: any;
-  schoolYears: { id: number; year: number; }[];
-  creditTypes: { id: number; name: string; }[];
-  courseTypes: { id: number; code: string; name: string; }[];
-  classTypes: { id: number; name: string; }[];
-  subjectAreas: { id: number; name: string; }[];
-  grades: { id: number; grade: string; name: string; }[];
+  pageTitle: string = 'Course Edit';
 
-  constructor(private courseService: CourseService, private lookup: LookupService, private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const id = +params.get('id');
-      this.schoolYears = this.lookup.getServiceYears();
-      this.creditTypes = this.lookup.getCreditTypes();
-      this.courseTypes = this.lookup.getCourseTypes();
-      this.classTypes = this.lookup.getClassTypes();
-      this.subjectAreas = this.lookup.getSubjectAreas();
-      this.grades = this.lookup.getGrades();
-
-      this.courseService.getCourse(id).subscribe(data => {
-        this.course = data;
-      });
-    });
-  }
-
-  onSubmit(formValues) {
-    this.courseService.saveCourse(this.course).subscribe(() => {
-      console.log('saved');
-    });
   }
 }
