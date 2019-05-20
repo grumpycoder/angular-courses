@@ -19,7 +19,12 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     RouterModule.forChild([
       { path: 'courses', component: CourseListComponent },
-      { path: 'courses/:id/edit', component: CourseEditComponent }
+      {
+        path: 'courses/:id/edit', component: CourseEditComponent, children: [
+          { path: '', redirectTo: 'info', pathMatch: 'full' },
+          { path: 'info', component: CourseEditInfoComponent }
+        ]
+      }
     ]),
     SharedModule,
     DxButtonModule,
