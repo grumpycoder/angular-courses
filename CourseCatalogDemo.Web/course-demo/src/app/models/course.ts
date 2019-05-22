@@ -14,6 +14,7 @@ export interface ICourse {
   subjectArea: string;
   status: string;
   creditTypeId?: number;
+  careerTechPrograms: any[];
 }
 
 export interface CourseResolved {

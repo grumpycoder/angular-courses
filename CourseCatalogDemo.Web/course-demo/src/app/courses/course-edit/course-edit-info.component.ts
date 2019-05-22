@@ -25,18 +25,9 @@ export class CourseEditInfoComponent implements OnInit {
 
   ngOnInit() {
     this.route.parent.data.subscribe(data => {
-      console.log('parent data', data);
-      this.course = data['resolvedData'].course;
-      console.log('edit info', this.course);
-
+      this.course = data.resolvedData.course;
     });
 
-    // this.route.parent.data.subscribe(data => {
-    //   console.log('parent data', data);
-    //   //this.course = data.resolvedData;
-    //   console.log('course', this.course);
-
-    // });
     this.schoolYears = this.lookup.getServiceYears();
     this.creditTypes = this.lookup.getCreditTypes();
     this.courseTypes = this.lookup.getCourseTypes();
@@ -47,7 +38,7 @@ export class CourseEditInfoComponent implements OnInit {
 
   onSubmit(formValues) {
     // this.courseService.saveCourse(this.course).subscribe(() => {
-    //   console.log('saved');
+    console.log('update course');
     // });
   }
 

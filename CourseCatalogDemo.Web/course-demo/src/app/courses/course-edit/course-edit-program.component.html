@@ -4,19 +4,71 @@
 <div class="row">
   <div class="col-md-6">
     <span>Available Programs</span>
-    <ul>
-      <li *ngFor="let program of programs">
-        {{ program.name }}
-      </li>
-    </ul>
+    <dx-list
+      #availablePrograms
+      [height]="200"
+      [dataSource]="programs"
+      selectionMode="multiple"
+      [showSelectionControls]="true"
+      [searchEnabled]="true"
+      [searchExpr]="['name', 'programCode']"
+      searchMode="contains"
+      pageLoadMode="scrollBottom"
+      itemTemplate="data"
+    >
+      <div *dxTemplate="let item of 'data'">
+        <div>({{ item.programCode }}) {{ item.name }}</div>
+      </div>
+    </dx-list>
+    <button
+      class="btn btn-primary"
+      [disabled]="!availablePrograms.selectedItems.length"
+      (click)="addProgram(availablePrograms)"
+    >
+      Add Programs
+    </button>
   </div>
 
   <div class="col-md-6">
     <span>Assigned Programs</span>
+    <dx-list
+      #currentPrograms
+      [height]="200"
+      [dataSource]="course.careerTechPrograms"
+      selectionMode="none"
+      [showSelectionControls]="true"
+      [searchEnabled]="true"
+      [searchExpr]="['name', 'programCode']"
+      searchMode="contains"
+      pageLoadMode="scrollBottom"
+      itemTemplate="data"
+      [allowItemDeleting]="true"
+      (onItemDeleting)="onItemDeleting($event)"
+    >
+      <div *dxTemplate="let item of 'data'">
+        <div>({{ item.programCode }}) {{ item.name }}</div>
+      </div>
+    </dx-list>
+    <!-- <button
+      class="btn btn-primary"
+      (click)="removeProgram(currentPrograms)"
+      [disabled]="!currentPrograms.selectedItems.length"
+    >
+      Remove Programs
+    </button>-->
     <ul>
       <li *ngFor="let program of course.careerTechPrograms">
         {{ program.name }}
       </li>
     </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <code>
+      <pre
+        >{{ course.careerTechPrograms | json }}
+      </pre>
+    </code>
   </div>
 </div>

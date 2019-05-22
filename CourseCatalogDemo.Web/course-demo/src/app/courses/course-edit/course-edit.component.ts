@@ -24,32 +24,13 @@ export class CourseEditComponent implements OnInit {
   ngOnInit() {
 
     this.route.data.subscribe(data => {
-      const resolvedData: CourseResolved = data['resolvedData'];
+      const resolvedData: CourseResolved = data.resolvedData;
       this.errorMessage = resolvedData.error;
       this.onCourseRetrieved(resolvedData.course);
     });
-
-    // this.route.paramMap.subscribe(params => {
-    //   const id = +params.get('id');
-    //   this.schoolYears = this.lookup.getServiceYears();
-    //   this.creditTypes = this.lookup.getCreditTypes();
-    //   this.courseTypes = this.lookup.getCourseTypes();
-    //   this.classTypes = this.lookup.getClassTypes();
-    //   this.subjectAreas = this.lookup.getSubjectAreas();
-    //   this.grades = this.lookup.getGrades();
-
-    //   this.courseService.getCourseEdit(id).subscribe(data => {
-    //     this.course = data;
-    //     console.log('parent data', data);
-
-    //     console.log('course edit', this.course);
-
-    //   });
-    // });
   }
 
   onCourseRetrieved(course: ICourse): void {
-    console.log('retrieved course', course);
     this.course = course;
     if (this.course) {
       this.pageTitle = `Course Detail: ${this.course.name} (${this.course.courseCode})`;

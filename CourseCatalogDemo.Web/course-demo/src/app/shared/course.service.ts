@@ -24,23 +24,16 @@ export class CourseService {
     });
   }
 
-  // getCourses(): any[] {
-  //   //return COURSES;
-  // }
-
   getCoursesApi(): any[] {
     return this.dataSource;
   }
 
   getCourse(id: number): any {
-    console.log('url', this.url + '/' + id);
-    return this.http.get<ICourse>(this.url + '/' + id);
-    // return COURSES.find(course => course.id == id);
+    return this.http.get<ICourse>(this.url + '/' + id + '/full');
   }
 
   getCourseEdit(id: number): any {
-    console.log('url', this.url + '/' + id);
-    return this.http.get<ICourse>(this.url + '/' + id + '/edit');
+    return this.http.get<ICourse>(this.url + '/' + id + '/edit/full');
     // return COURSES.find(course => course.id == id);
   }
   saveCourse(course: ICourse) {

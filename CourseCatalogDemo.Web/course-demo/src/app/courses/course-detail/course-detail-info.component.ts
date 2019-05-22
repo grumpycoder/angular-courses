@@ -12,8 +12,7 @@ export class CourseDetailInfoComponent implements OnInit {
 
   ngOnInit() {
     this.route.parent.data.subscribe(data => {
-      console.log('parent data', data);
-      this.course = data['resolvedData'].course;
+      this.course = data.resolvedData.course;
     });
   }
 

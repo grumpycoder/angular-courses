@@ -17,14 +17,13 @@ export class CourseDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      const resolvedData: CourseResolved = data['resolvedData'];
+      const resolvedData: CourseResolved = data.resolvedData;
       this.errorMessage = resolvedData.error;
       this.onCourseRetrieved(resolvedData.course);
     });
   }
 
   onCourseRetrieved(course: ICourse): void {
-    console.log('retrieved course', course);
     this.course = course;
     if (this.course) {
       this.pageTitle = `Course Detail: ${this.course.name} (${this.course.courseCode})`;
@@ -34,9 +33,6 @@ export class CourseDetailComponent implements OnInit {
   }
 
   editCourse(): void {
-    console.log('edit');
-
-    console.log('navigate to id', this.course.id);
     this.router.navigate(['/courses', this.course.id, 'edit']);
 
   }

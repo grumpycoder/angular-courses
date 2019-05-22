@@ -13,8 +13,9 @@ export class CourseDetailProgramComponent implements OnInit {
 
   ngOnInit() {
     this.route.parent.data.subscribe(data => {
-      console.log('parent data', data);
-      this.course = data.resolvedData;
+      this.course = data.resolvedData.course;
+      console.log('course program', this.course);
+
     });
   }
 
