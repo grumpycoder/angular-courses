@@ -30,7 +30,8 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         [HttpGet, Route("{id}")]
         public async Task<object> Get(int id)
         {
-            var dto = await _context.Courses.Include(x => x.BeginServiceYear).FirstOrDefaultAsync(c => c.Id == id);
+            //var dto = await _context.Courses.Include(x => x.BeginServiceYear).FirstOrDefaultAsync(c => c.Id == id);
+            var dto = await _context.Courses.Include(x => x.CareerTechPrograms).FirstOrDefaultAsync(c => c.Id == id);
 
             return Ok(dto);
         }

@@ -16,12 +16,5 @@
         public string SubjectArea { get; set; }
         public string Status { get; set; }
 
-        //public int? BeginServiceYearId { get; set; }
-        //public int? EndServiceYearId { get; set; }
-
-        //public int? CreditTypeId { get; set; }
-        //public int? CourseTypeId { get; set; }
-        //public int? ClassTypeId { get; set; }
-        //public int? SubjectAreaId { get; set; }
     }
 }

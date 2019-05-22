@@ -1,3 +1,22 @@
 <p>
   course-edit-program works!
 </p>
+<div class="row">
+  <div class="col-md-6">
+    <span>Available Programs</span>
+    <ul>
+      <li *ngFor="let program of programs">
+        {{ program.name }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-md-6">
+    <span>Assigned Programs</span>
+    <ul>
+      <li *ngFor="let program of course.careerTechPrograms">
+        {{ program.name }}
+      </li>
+    </ul>
+  </div>
+</div>

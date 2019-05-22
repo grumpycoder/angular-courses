@@ -29,8 +29,25 @@ export class LookupService {
   getGrades() {
     return GRADES;
   }
+
+  getPrograms() {
+    return PROGRAMS;
+  }
 }
 
+const PROGRAMS = [
+  { id: 1, programCode: '001', name: '7th/8th Grade Agriscience' },
+  { id: 2, programCode: '002', name: 'Administration and Professional Support Services' },
+  { id: 3, programCode: '003', name: 'Advertising Design' },
+  { id: 4, programCode: '004', name: 'Agribusiness Systems' },
+  { id: 5, programCode: '005', name: 'AgriConstruction' },
+  { id: 6, programCode: '006', name: 'Air Force JROTC' },
+  { id: 7, programCode: '007', name: 'Animal Systems' },
+  { id: 8, programCode: '008', name: 'Animation' },
+  { id: 9, programCode: '009', name: 'Aquaculture' },
+  { id: 10, programCode: '010', name: 'Army JROTC' },
+
+]
 const GRADES = [
   { id: null, grade: null, name: null },
   { id: -2, grade: 'BK', name: 'Birth to 5 years' },

@@ -1,4 +1,6 @@
-﻿namespace CourseCatalogDemo.Core.Models
+﻿using System.Collections.Generic;
+
+namespace CourseCatalogDemo.Core.Models
 {
     public class Course
     {
@@ -28,5 +30,7 @@
         public CreditType CreditType { get; set; }
         public ClassType ClassType { get; set; }
         public SubjectArea SubjectArea { get; set; }
+
+        public List<CareerTechProgram> CareerTechPrograms { get; set; }
     }
 }

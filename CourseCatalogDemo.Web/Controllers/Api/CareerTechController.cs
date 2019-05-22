@@ -60,5 +60,12 @@ namespace CourseCatalogDemo.Web.Controllers.Api
             var programs = await _context.CareerTechPrograms.Where(x => x.SchoolYear == schoolYear).ToListAsync();
             return Ok(programs);
         }
+
+        [HttpGet, Route("programs/{schoolYear}/{programCode}/courses")]
+        public async Task<object> Courses(int schoolYear, string programCode)
+        {
+            var program = await _context.CareerTechPrograms.Include(x => x.Courses).FirstOrDefaultAsync(x => x.ProgramCode == programCode && x.SchoolYear == schoolYear);
+            return Ok(program);
+        }
     }
 }

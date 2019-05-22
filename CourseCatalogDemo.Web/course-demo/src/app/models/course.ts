@@ -15,3 +15,8 @@ export interface ICourse {
   status: string;
   creditTypeId?: number;
 }
+
+export interface CourseResolved {
+  course: ICourse;
+  error?: any
+}

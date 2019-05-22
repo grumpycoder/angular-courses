@@ -1,4 +1,6 @@
-﻿namespace CourseCatalogDemo.Core.Models
+﻿using System.Collections.Generic;
+
+namespace CourseCatalogDemo.Core.Models
 {
     public class CareerTechProgram
     {
@@ -7,5 +9,6 @@
         public string ProgramCode { get; set; }
         public string Name { get; set; }
 
+        public List<Course> Courses { get; set; }
     }
 }
