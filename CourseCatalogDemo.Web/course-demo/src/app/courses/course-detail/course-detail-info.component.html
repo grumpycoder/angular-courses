@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col">
+    <label for="">Course Code: {{ course.courseCode }}</label
+    ><br />
+    <label for="">CIP Code: {{ course.cipCode }}</label
+    ><br />
+    <label for="">Course Name: {{ course.name }}</label
+    ><br />
+    <label for="">Description: {{ course.description }}</label
+    ><br />
+    <label for="">Begin Service: {{ course.beginServiceYear }}</label
+    ><br />
+    <label for="">End Service: {{ course.endServiceYear }}</label
+    ><br />
+    <label for="">Low Grade: {{ course.lowGrade }}</label
+    ><br />
+    <label for="">High Grade: {{ course.highGrade }}</label
+    ><br />
+    <label for="">Course Type: {{ course.courseType }}</label
+    ><br />
+    <label for="">Class Type: {{ course.classType }}</label
+    ><br />
+    <label for="">Subject Area: {{ course.subjectArea }}</label
+    ><br />
+    <label for="">Credit Type: {{ course.creditType }}</label
+    ><br />
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <code>
+      <pre>{{ course | json }}</pre>
+    </code>
+  </div>
+</div>

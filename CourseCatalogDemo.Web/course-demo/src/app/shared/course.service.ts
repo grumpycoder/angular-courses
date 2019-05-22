@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class CourseService {
   courses: any[];
-  private url: string = 'http://localhost:62634/api/course';
+  private url: string = 'http://localhost:62634/api/courses';
   dataSource: any;
   private course: ICourse;
 
@@ -38,6 +38,11 @@ export class CourseService {
     // return COURSES.find(course => course.id == id);
   }
 
+  getCourseEdit(id: number): any {
+    console.log('url', this.url + '/' + id);
+    return this.http.get<ICourse>(this.url + '/' + id + '/edit');
+    // return COURSES.find(course => course.id == id);
+  }
   saveCourse(course: ICourse) {
     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http

@@ -33,11 +33,12 @@
       ></dxo-editing> -->
       <dxi-column type="selection" cellTemplate="selectionCellTemplate"> </dxi-column>
       <div *dxTemplate="let cellInfo of 'selectionCellTemplate'">
-        <a
+        <a [routerLink]="['/courses', cellInfo.data.id]">Details</a>
+        <!-- <a
           [routerLink]="['/courses', cellInfo.data.id, 'edit']"
           routerLinkActive="router-link-active"
           >Edit</a
-        >
+        > -->
       </div>
       <dxi-column dataField="courseCode" caption="Course Code"></dxi-column>
       <dxi-column dataField="name" caption="Course Code"></dxi-column>

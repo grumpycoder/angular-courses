@@ -1,5 +1,6 @@
 <p>
-  course-edit-info works!
+  course-edit-info works! Service year:
+  {{ course.beginServiceYearId }}
 </p>
 
 <form novalidate #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm.value)">
@@ -182,8 +183,11 @@
   </button>
 </form>
 
-<pre>
-  <code>
-    {{ course | json}}
-  </code>
-</pre>
+<div>
+  <h4>Course Edit Info</h4>
+  <pre>
+    <code>
+      {{ course | json}}
+    </code>
+  </pre>
+</div>

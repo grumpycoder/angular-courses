@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace CourseCatalogDemo.Web.Controllers.Api
 {
-    [RoutePrefix("api/course")]
+    [RoutePrefix("api/courses")]
     public class CourseController : ApiController
     {
         private readonly CourseDbContext _context;
@@ -19,7 +19,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
             _context = CourseDbContext.Create();
         }
 
-        [HttpGet]
+        [HttpGet, Route("")]
         public async Task<object> Get(DataSourceLoadOptions loadOptions)
         {
             var list = await _context.CourseViews.ToListAsync();
@@ -31,7 +31,44 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         public async Task<object> Get(int id)
         {
             //var dto = await _context.Courses.Include(x => x.BeginServiceYear).FirstOrDefaultAsync(c => c.Id == id);
+            //var dto = await _context.Courses.FirstOrDefaultAsync(c => c.Id == id);
+            var dto = await _context.CourseViews.FirstOrDefaultAsync(c => c.Id == id);
+
+            return Ok(dto);
+        }
+
+        [HttpGet, Route("{id}/full")]
+        public async Task<object> GetFull(int id)
+        {
+            //var dto = await _context.Courses.Include(x => x.BeginServiceYear).FirstOrDefaultAsync(c => c.Id == id);
             var dto = await _context.Courses.Include(x => x.CareerTechPrograms).FirstOrDefaultAsync(c => c.Id == id);
+
+            return Ok(dto);
+        }
+
+        [HttpGet, Route("{id}/edit")]
+        public async Task<object> GetEdit(int id)
+        {
+            //var dto = await _context.Courses.Include(x => x.BeginServiceYear).FirstOrDefaultAsync(c => c.Id == id);
+            var dto = await _context.Courses.FirstOrDefaultAsync(c => c.Id == id);
+
+            return Ok(dto);
+        }
+
+        [HttpGet, Route("view/{id}")]
+        public async Task<object> GetCouresView(int id)
+        {
+            //var dto = await _context.Courses.Include(x => x.BeginServiceYear).FirstOrDefaultAsync(c => c.Id == id);
+            var dto = await _context.CourseViews.FirstOrDefaultAsync(c => c.Id == id);
+
+            return Ok(dto);
+        }
+
+        [HttpGet, Route("view/{id}/full")]
+        public async Task<object> GetCouresViewFull(int id)
+        {
+            //var dto = await _context.Courses.Include(x => x.BeginServiceYear).FirstOrDefaultAsync(c => c.Id == id);
+            var dto = await _context.CourseViews.FirstOrDefaultAsync(c => c.Id == id);
 
             return Ok(dto);
         }

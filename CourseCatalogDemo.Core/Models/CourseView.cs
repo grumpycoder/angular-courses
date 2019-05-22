@@ -9,7 +9,8 @@
         public string CipCode { get; set; }
         public string BeginServiceYear { get; set; }
         public string EndServiceYear { get; set; }
-
+        public string LowGrade { get; set; }
+        public string HighGrade { get; set; }
         public string CreditType { get; set; }
         public string CourseType { get; set; }
         public string ClassType { get; set; }

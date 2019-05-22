@@ -18,5 +18,5 @@ export interface ICourse {
 
 export interface CourseResolved {
   course: ICourse;
-  error?: any
+  error?: any;
 }
