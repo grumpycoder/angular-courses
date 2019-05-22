@@ -13,6 +13,7 @@ export class CourseListComponent implements OnInit {
   constructor(private courseService: CourseService, private router: Router) { }
 
   ngOnInit() {
+
     this.courses = this.courseService.getCoursesApi();
   }
 

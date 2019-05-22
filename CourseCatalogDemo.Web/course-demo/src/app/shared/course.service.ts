@@ -36,6 +36,7 @@ export class CourseService {
     return this.http.get<ICourse>(this.url + '/' + id + '/edit/full');
     // return COURSES.find(course => course.id == id);
   }
+
   saveCourse(course: ICourse) {
     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http

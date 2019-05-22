@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Http;
-using AutoMapper;
+﻿using AutoMapper;
 using CourseCatalogDemo.Core.Dtos;
 using CourseCatalogDemo.Core.Models;
 using CourseCatalogDemo.Infrastructure;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace CourseCatalogDemo.Web.Controllers.Api
 {
@@ -66,6 +66,20 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         {
             var program = await _context.CareerTechPrograms.Include(x => x.Courses).FirstOrDefaultAsync(x => x.ProgramCode == programCode && x.SchoolYear == schoolYear);
             return Ok(program);
+        }
+
+        [HttpPost, Route("programs/{programId}/{courseId}")]
+        public async Task<object> RemoveProgramCourse(int programId, int courseId)
+        {
+            //return BadRequest("Does nto exist");
+
+            return Ok($"removed {courseId} from {programId}");
+        }
+
+        [HttpPost, Route("programs/{programId}/{courseId}/err")]
+        public async Task<object> RemoveProgramCourseErr(int programId, int courseId)
+        {
+            return BadRequest("Does nto exist");
         }
     }
 }

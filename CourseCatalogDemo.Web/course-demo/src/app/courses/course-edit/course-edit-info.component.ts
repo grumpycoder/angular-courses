@@ -37,9 +37,9 @@ export class CourseEditInfoComponent implements OnInit {
   }
 
   onSubmit(formValues) {
-    // this.courseService.saveCourse(this.course).subscribe(() => {
-    console.log('update course');
-    // });
+    this.courseService.saveCourse(this.course).subscribe(() => {
+      console.log('update course');
+    });
   }
 
 }
