@@ -26,8 +26,8 @@ import { HomeComponent } from './home/home.component';
     DxTemplateModule,
     DxBulletModule,
     DxListModule,
-    CourseModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CourseModule
   ],
   declarations: [
     AppComponent,

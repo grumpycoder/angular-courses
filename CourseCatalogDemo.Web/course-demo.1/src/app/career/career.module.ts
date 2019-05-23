@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ManagerComponent } from './manager/manager.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [ManagerComponent],
   imports: [
     CommonModule
   ]
 })
-export class CareerTechModule { }
+export class CareerModule { }
