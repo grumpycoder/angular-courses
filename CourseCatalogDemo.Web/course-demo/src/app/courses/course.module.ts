@@ -4,6 +4,13 @@ import { CourseListComponent } from './course-list.component';
 import { CourseEditComponent } from './course-edit/course-edit.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { RouterModule, Routes } from '@angular/router';
+import {
+  DxButtonModule,
+  DxDataGridModule,
+  DxBulletModule,
+  DxTemplateModule,
+  DxListModule
+} from 'devextreme-angular';
 
 const routes: Routes = [
   { path: '', component: CourseListComponent },
@@ -14,7 +21,12 @@ const routes: Routes = [
   declarations: [CourseListComponent, CourseDetailComponent, CourseEditComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    DxButtonModule,
+    DxDataGridModule,
+    DxTemplateModule,
+    DxBulletModule,
+    DxListModule
   ]
 })
 export class CourseModule { }
