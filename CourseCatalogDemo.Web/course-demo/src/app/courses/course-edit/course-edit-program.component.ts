@@ -15,7 +15,8 @@ export class CourseEditProgramComponent implements OnInit {
   selectedItems: [];
   private error: boolean;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private lookup: LookupService,
     private careerTech: CareerTechService,
     private courseService: CourseService) { }
@@ -30,7 +31,12 @@ export class CourseEditProgramComponent implements OnInit {
   addProgram(list): void {
     list.selectedItems.forEach(item => {
       console.log('call service to add program', item);
-      this.course.careerTechPrograms.push(item);
+      this.careerTech.addProgramCourse(this.course, item).subscribe(
+        () => {
+          console.log('add course');
+          this.course.careerTechPrograms.push(item);
+
+        });
     });
     list.selectedItems = [];
   }

@@ -13,29 +13,19 @@ export class CareerTechService {
 
   addProgramCourse(course, program) {
     console.log(`add ${course.name} to ${program.name}`);
-
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    const address = this.url + 'programs/' + program.id + '/' + course.id + '/';
+    return this.http
+      .post(address, options)
+      .pipe(catchError(this.handleError));
   }
 
   removeProgramCourse(course, program) {
     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     const address = this.url + 'programs/' + program.id + '/' + course.id + '/';
-    // return this.http
-    //   .post(address, options)
-    //   .pipe(catchError(err => {
-    //     console.log('handling error', err);
-    //     return throwError(err);
-    //   }), finalize(() => {
-    //     console.log('finalize');
-
-    //   }));
-
     return this.http
-      .post(address, options)
+      .delete(address, options)
       .pipe(catchError(this.handleError));
-
-    // return this.http
-    //   .post(address, options)
-    //   .pipe(catchError(this.handleError));
   }
 
   private handleError(err) {

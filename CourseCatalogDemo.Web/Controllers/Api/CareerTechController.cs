@@ -6,6 +6,7 @@ using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -16,10 +17,12 @@ namespace CourseCatalogDemo.Web.Controllers.Api
     public class CareerTechController : ApiController
     {
         private readonly CareerTechDbContext _context;
+        private readonly CourseDbContext _courseContext;
 
         public CareerTechController()
         {
             _context = CareerTechDbContext.Create();
+            _courseContext = CourseDbContext.Create();
         }
 
         [HttpGet, Route("clusters/{year:int?}")]
@@ -68,18 +71,66 @@ namespace CourseCatalogDemo.Web.Controllers.Api
             return Ok(program);
         }
 
-        [HttpPost, Route("programs/{programId}/{courseId}")]
+        //[HttpDelete, Route("programs/{programId}/{courseId}")]
+        //public async Task<object> RemoveProgramCourse(int programId, int courseId)
+        [HttpDelete, Route("programs/{programId}/{courseId}")]
         public async Task<object> RemoveProgramCourse(int programId, int courseId)
         {
-            //return BadRequest("Does nto exist");
 
-            return Ok($"removed {courseId} from {programId}");
+            var link = await _context.CareerTechProgramCourses.FirstOrDefaultAsync(x => x.CourseId == courseId && x.ProgramId == programId);
+
+            if (link == null) return NotFound();
+
+            _context.CareerTechProgramCourses.Remove(link);
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+
         }
 
-        [HttpPost, Route("programs/{programId}/{courseId}/err")]
-        public async Task<object> RemoveProgramCourseErr(int programId, int courseId)
+        [HttpPost, Route("programs/{programId}/{courseId}")]
+        public async Task<object> AddProgramCourse(int programId, int courseId)
         {
-            return BadRequest("Does nto exist");
+
+            var existing =
+                _context.CareerTechProgramCourses.Any(x => x.ProgramId == programId && x.CourseId == courseId);
+
+            if (existing) return BadRequest("Course already assigned to program");
+
+            var link = new CareerTechProgramCourse()
+            {
+                CourseId = courseId,
+                ProgramId = programId,
+                ModifyUser = "mlawrence" //TODO: Get auth user
+            };
+            _context.CareerTechProgramCourses.Add(link);
+
+            await _context.SaveChangesAsync();
+            return Ok();
+
         }
+
+        [HttpPut, Route("programs/{programId}/{courseId}")]
+        public async Task<object> UpdateProgramCourse(ProgramCourseEditDto dto)
+        {
+
+            var existing = await
+                _context.CareerTechProgramCourses.FirstOrDefaultAsync(x => x.ProgramId == dto.ProgramId && x.CourseId == dto.CourseId);
+
+            if (existing == null) return NotFound();
+
+            existing.IsActive = dto.IsActive; 
+            existing.IsElective = dto.IsElective; 
+            existing.IsFoundation = dto.IsFoundation; 
+            existing.IsRequired = dto.IsRequired; 
+
+            _context.CareerTechProgramCourses.AddOrUpdate(existing);
+
+            await _context.SaveChangesAsync();
+            return Ok();
+
+        }
+
     }
 }

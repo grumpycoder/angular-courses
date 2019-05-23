@@ -3,7 +3,7 @@
     <h6>Available Programs</h6>
     <dx-list
       #availablePrograms
-      [height]="200"
+      [height]="400"
       [dataSource]="programs"
       selectionMode="multiple"
       [showSelectionControls]="true"
@@ -42,7 +42,7 @@
     <h6>Assigned Programs</h6>
     <dx-list
       #currentPrograms
-      [height]="200"
+      [height]="400"
       [dataSource]="course.careerTechPrograms"
       selectionMode="multiple"
       [showSelectionControls]="true"
@@ -51,11 +51,41 @@
       searchMode="contains"
       pageLoadMode="scrollBottom"
       itemTemplate="data"
-      [allowItemDeleting]="true"
       (onItemDeleting)="onItemDeleting($event)"
     >
       <div *dxTemplate="let item of 'data'">
-        <div>({{ item.programCode }}) {{ item.name }}</div>
+        <div>
+          <div>({{ item.programCode }}) {{ item.name }}</div>
+          <div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox1"
+                value="option1"
+              />
+              <label class="form-check-label" for="inlineCheckbox1">Foundation</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox2"
+                value="option2"
+              />
+              <label class="form-check-label" for="inlineCheckbox2">Elective</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox3"
+                value="option3"
+              />
+              <label class="form-check-label" for="inlineCheckbox3">Required</label>
+            </div>
+          </div>
+        </div>
       </div>
     </dx-list>
   </div>

@@ -9,6 +9,6 @@ namespace CourseCatalogDemo.Core.Models
         public string ProgramCode { get; set; }
         public string Name { get; set; }
 
-        public List<Course> Courses { get; set; }
+        public List<Course> Courses { get; set; } = new List<Course>();
     }
 }

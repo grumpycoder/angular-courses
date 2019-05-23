@@ -20,7 +20,6 @@ namespace CourseCatalogDemo.Core.Models
         public int? ClassTypeId { get; set; }
         public int? SubjectAreaId { get; set; }
 
-
         public SchoolYear BeginServiceYear { get; set; }
         public SchoolYear EndServiceYear { get; set; }
 

@@ -53,7 +53,9 @@
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="Dtos\ClusterEditDto.cs" />
     <Compile Include="Dtos\CourseEditDto.cs" />
+    <Compile Include="Dtos\ProgramCourseEditDto.cs" />
     <Compile Include="Models\CareerTechProgram.cs" />
+    <Compile Include="Models\CareerTechProgramCourse.cs" />
     <Compile Include="Models\ClassType.cs" />
     <Compile Include="Models\Cluster.cs" />
     <Compile Include="Models\ClusterType.cs" />
