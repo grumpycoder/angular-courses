@@ -13,12 +13,13 @@ import {
 } from 'devextreme-angular';
 import { CourseInfoComponent } from './course-info/course-info.component';
 import { CourseProgramComponent } from './course-program/course-program.component';
+import { CourseResolver } from './course-resolver.service';
 
 const routes: Routes = [
 
   { path: '', component: CourseListComponent },
   {
-    path: ':id', component: CourseDetailComponent,
+    path: ':id', component: CourseDetailComponent, resolve: { resolvedData: CourseResolver },
     children: [
       { path: '', component: CourseInfoComponent },
       { path: 'info', component: CourseInfoComponent },

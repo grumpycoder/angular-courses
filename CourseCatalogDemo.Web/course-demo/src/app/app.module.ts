@@ -14,6 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CourseModule } from './courses/course.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     DxDataGridModule,
     DxTemplateModule,
     DxBulletModule,
-    DxListModule
+    DxListModule,
+    CourseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
