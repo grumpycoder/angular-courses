@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-course-program',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class CourseProgramComponent implements OnInit {
+  course: any;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.parent.data.subscribe(data => {
+      this.course = data.resolvedData.course;
+      console.log('course program', this.course);
+
+    });
   }
 
 }
