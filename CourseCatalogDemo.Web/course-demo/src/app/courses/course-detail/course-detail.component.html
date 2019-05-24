@@ -8,6 +8,10 @@
       <a [routerLink]="['info']" routerLinkActive="active">Basic Information</a>
       <a [routerLink]="['programs']" routerLinkActive="active">Programs</a>
     </div>
+
+    <a [routerLink]="['/courses', course.id, 'edit', 'info']" routerLinkActive="router-link-active"
+      >Edit</a
+    >
     <!-- <button class="btn btn-primary" (click)="editCourse()">Edit</button> -->
 
     <router-outlet></router-outlet>

@@ -14,6 +14,9 @@ import {
 import { CourseInfoComponent } from './course-info/course-info.component';
 import { CourseProgramComponent } from './course-program/course-program.component';
 import { CourseResolver } from './course-resolver.service';
+import { CourseInfoEditComponent } from './course-info/course-info-edit.component';
+import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
 
@@ -26,7 +29,14 @@ const routes: Routes = [
       { path: 'programs', component: CourseProgramComponent }
     ]
   },
-  { path: ':id/edit', component: CourseEditComponent }
+  {
+    path: ':id/edit', component: CourseEditComponent,
+    resolve: { resolvedData: CourseResolver },
+    children: [
+      { path: '', component: CourseInfoEditComponent },
+      { path: 'info', component: CourseInfoEditComponent }
+    ]
+  }
 ];
 
 @NgModule({
@@ -36,10 +46,12 @@ const routes: Routes = [
     CourseEditComponent,
     CourseInfoComponent,
     CourseProgramComponent,
+    CourseInfoEditComponent,
 
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(routes),
     DxButtonModule,
     DxDataGridModule,
