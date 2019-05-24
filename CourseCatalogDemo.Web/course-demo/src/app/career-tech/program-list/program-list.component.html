@@ -1,3 +1,59 @@
-<p>
-  program-list works!
-</p>
+<div class="card">
+  <div class="card-header">
+    {{ pageTitle }}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-4">
+        <span class="title">Programs</span>
+        <dx-select-box
+          [dataSource]="data"
+          placeholder="Choose Program"
+          displayExpr="programName"
+          [showClearButton]="true"
+          [searchEnabled]="true"
+          [searchExpr]="['clusterName', 'programName']"
+          [grouped]="true"
+          (selectedItemChange)="onSelectionChanged($event)"
+        >
+        </dx-select-box>
+        <span *ngIf="selectedProgram">
+          In-Service {{ selectedProgram.beginYear }} - {{ selectedProgram.endYear }}
+        </span>
+      </div>
+      <div class="col-8">
+        <dx-list [items]="courses" height="100%">
+          <div *dxTemplate="let item of 'item'">
+            <div>
+              <div>{{ item.name }}</div>
+              <div>{{ item.courseCode }}</div>
+              <div>Class Type:{{ item.classType }}</div>
+              <div>Course Type:{{ item.courseType }}</div>
+              <div>Credit Type:{{ item.creditType }}</div>
+              <div>Service Years: {{ item.beginYear }}-{{ item.endYear }}</div>
+            </div>
+          </div>
+        </dx-list>
+
+        <!-- <ul class="list-group" *ngIf="courses">
+          <li class="list-group-item" *ngFor="let course of courses">
+            {{ course.name }}
+          </li>
+        </ul> -->
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+    More information
+  </div>
+
+  <div class="col-12">
+    courses here
+    <code>
+      <pre>
+            {{ selectedProgram | json }}
+          </pre
+      >
+    </code>
+  </div>
+</div>

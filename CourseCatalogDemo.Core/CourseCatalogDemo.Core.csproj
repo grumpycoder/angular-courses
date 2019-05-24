@@ -52,8 +52,10 @@
   <ItemGroup>
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="Dtos\ClusterEditDto.cs" />
+    <Compile Include="Dtos\CourseDto.cs" />
     <Compile Include="Dtos\CourseEditDto.cs" />
     <Compile Include="Dtos\ProgramCourseEditDto.cs" />
+    <Compile Include="Dtos\ProgramDto.cs" />
     <Compile Include="Models\CareerTechProgram.cs" />
     <Compile Include="Models\CareerTechProgramCourse.cs" />
     <Compile Include="Models\ClassType.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Models\SubjectArea.cs" />
     <Compile Include="Profiles\ClusterProfile.cs" />
     <Compile Include="Profiles\CourseProfile.cs" />
+    <Compile Include="Profiles\ProgramProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

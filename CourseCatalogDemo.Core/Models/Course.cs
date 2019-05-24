@@ -13,6 +13,9 @@ namespace CourseCatalogDemo.Core.Models
         public int? BeginServiceYearId { get; set; }
         public int? EndServiceYearId { get; set; }
 
+        public int? BeginYear { get; set; }
+        public int? EndYear { get; set; }
+
         public int? LowGradeId { get; set; }
         public int? HighGradeId { get; set; }
         public int? CourseTypeId { get; set; }
@@ -25,6 +28,7 @@ namespace CourseCatalogDemo.Core.Models
 
         public Grade LowGrade { get; set; }
         public Grade HighGrade { get; set; }
+        
         public CourseType CourseType { get; set; }
         public CreditType CreditType { get; set; }
         public ClassType ClassType { get; set; }

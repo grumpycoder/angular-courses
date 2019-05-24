@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CourseCatalogDemo.Core.Dtos;
 using CourseCatalogDemo.Core.Models;
 using CourseCatalogDemo.Infrastructure;
@@ -37,14 +38,14 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         }
 
 
-        [HttpGet, Route("cluster/{id}")]
+        [HttpGet, Route("clusters/{id}")]
         public async Task<object> Cluster(int id)
         {
             var dto = await _context.Clusters.FirstOrDefaultAsync(x => x.Id == id);
             return Ok(dto);
         }
 
-        [HttpPut, Route("cluster")]
+        [HttpPut, Route("clusters")]
         public async Task<object> Put(ClusterEditDto dto)
         {
             var cluster = await _context.Clusters.FindAsync(dto.Id);
@@ -56,19 +57,56 @@ namespace CourseCatalogDemo.Web.Controllers.Api
             return Ok(dto);
         }
 
-        [HttpGet, Route("programs/{schoolYear}")]
-        public async Task<object> Programs(int? schoolYear)
+        [HttpGet, Route("programs")]
+        public async Task<object> Programs()
         {
             //var schoolYear = 2017;
-            var programs = await _context.CareerTechPrograms.Where(x => x.SchoolYear == schoolYear).ToListAsync();
+            var programs = await _context.CareerTechPrograms.Where(x => x.SchoolYear == 2017).ProjectTo<ProgramDto>().ToListAsync();
             return Ok(programs);
         }
 
-        [HttpGet, Route("programs/{schoolYear}/{programCode}/courses")]
-        public async Task<object> Courses(int schoolYear, string programCode)
+
+        //[HttpGet, Route("programs/{schoolYear}")]
+        //public async Task<object> Programs(int? schoolYear)
+        //{
+        //    //var schoolYear = 2017;
+        //    var programs = await _context.CareerTechPrograms.Where(x => x.SchoolYear == schoolYear).ProjectTo<ProgramDto>().ToListAsync();
+        //    return Ok(programs);
+        //}
+
+        //[HttpGet, Route("programs/{schoolYear}/{programCode}/courses")]
+        //public async Task<object> Courses(int schoolYear, string programCode)
+        //{
+        //    var program = await _context.CareerTechPrograms.Include(x => x.Courses).FirstOrDefaultAsync(x => x.ProgramCode == programCode && x.SchoolYear == schoolYear);
+        //    return Ok(program);
+        //}
+
+        //[HttpGet, Route("program/{programCode}/courses")]
+        [HttpGet, Route("programs/{programCode}/courses")]
+        public async Task<object> Courses(string programCode)
         {
-            var program = await _context.CareerTechPrograms.Include(x => x.Courses).FirstOrDefaultAsync(x => x.ProgramCode == programCode && x.SchoolYear == schoolYear);
-            return Ok(program);
+            //var program = await _context.CareerTechPrograms
+            //    .Include(x => x.Courses)
+            //    .FirstOrDefaultAsync(x => x.ProgramCode == programCode && x.SchoolYear == 2017);
+
+            //var d = await _context.CareerTechPrograms
+            //    .Include(x => x.Courses)
+            //    .Where(x => x.ProgramCode == programCode && x.SchoolYear == 2017)
+            //    .Select(x => x.Courses).ToListAsync();
+
+            var dto = await _courseContext.Courses
+                .Where(x => x.CareerTechPrograms.Any(c => c.ProgramCode == programCode))
+                .ProjectTo<CourseDto>().ToListAsync(); 
+
+
+            CareerTechProgram d = await _context.CareerTechPrograms
+                .Include(x => x.Courses)
+                .FirstOrDefaultAsync(x => x.ProgramCode == programCode && x.SchoolYear == 2017);
+            
+            
+            //var dto = Mapper.Map<List<CourseDto>>(d.Courses);
+
+            return Ok(dto);
         }
 
         //[HttpDelete, Route("programs/{programId}/{courseId}")]
@@ -120,10 +158,10 @@ namespace CourseCatalogDemo.Web.Controllers.Api
 
             if (existing == null) return NotFound();
 
-            existing.IsActive = dto.IsActive; 
-            existing.IsElective = dto.IsElective; 
-            existing.IsFoundation = dto.IsFoundation; 
-            existing.IsRequired = dto.IsRequired; 
+            existing.IsActive = dto.IsActive;
+            existing.IsElective = dto.IsElective;
+            existing.IsFoundation = dto.IsFoundation;
+            existing.IsRequired = dto.IsRequired;
 
             _context.CareerTechProgramCourses.AddOrUpdate(existing);
 

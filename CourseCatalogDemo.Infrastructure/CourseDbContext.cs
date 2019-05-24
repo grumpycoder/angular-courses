@@ -43,6 +43,7 @@ namespace CourseCatalogDemo.Infrastructure
             modelBuilder.Configurations.Add(new DeliveryTypeConfiguration());
             modelBuilder.Configurations.Add(new SubjectAreaConfiguration());
 
+            modelBuilder.Configurations.Add(new ClusterConfiguration());
             modelBuilder.Configurations.Add(new CareerTechProgramConfiguration());
 
 

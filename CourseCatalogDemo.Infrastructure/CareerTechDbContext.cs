@@ -34,11 +34,11 @@ namespace CourseCatalogDemo.Infrastructure
 
             modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("smalldatetime"));
 
-            //modelBuilder.Configurations.Add(new CourseConfiguration());
+            modelBuilder.Configurations.Add(new CourseConfiguration());
             modelBuilder.Configurations.Add(new CareerTechProgramConfiguration());
             modelBuilder.Configurations.Add(new ClusterTypeConfiguration());
             modelBuilder.Configurations.Add(new ClusterConfiguration());
-            modelBuilder.Configurations.Add(new CareerTechProgramCourseConfiguration());
+            //modelBuilder.Configurations.Add(new CareerTechProgramCourseConfiguration());
         }
     }
 }

@@ -6,6 +6,7 @@ using DevExtreme.AspNet.Mvc;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Http;
+using AutoMapper.QueryableExtensions;
 
 namespace CourseCatalogDemo.Web.Controllers.Api
 {
@@ -41,7 +42,9 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         public async Task<object> GetFull(int id)
         {
             //var dto = await _context.Courses.Include(x => x.BeginServiceYear).FirstOrDefaultAsync(c => c.Id == id);
-            var dto = await _context.Courses.Include(x => x.CareerTechPrograms).FirstOrDefaultAsync(c => c.Id == id);
+            var dto = await _context.Courses
+                .Include(x => x.CareerTechPrograms).ProjectTo<CourseDto>()
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             return Ok(dto);
         }

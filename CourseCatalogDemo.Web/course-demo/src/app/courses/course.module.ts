@@ -15,7 +15,6 @@ import { CourseInfoComponent } from './course-info/course-info.component';
 import { CourseProgramComponent } from './course-program/course-program.component';
 import { CourseResolver } from './course-resolver.service';
 import { CourseInfoEditComponent } from './course-info/course-info-edit.component';
-import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { CourseProgramEditComponent } from './course-program/course-program-edit.component';
 
