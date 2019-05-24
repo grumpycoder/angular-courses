@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { CourseResolved, ICourse } from 'src/app/models/course';
 
 @Component({
-  selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
   styleUrls: []
 })
