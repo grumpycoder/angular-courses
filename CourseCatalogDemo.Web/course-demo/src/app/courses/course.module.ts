@@ -17,6 +17,7 @@ import { CourseResolver } from './course-resolver.service';
 import { CourseInfoEditComponent } from './course-info/course-info-edit.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { CourseProgramEditComponent } from './course-program/course-program-edit.component';
 
 const routes: Routes = [
 
@@ -34,7 +35,8 @@ const routes: Routes = [
     resolve: { resolvedData: CourseResolver },
     children: [
       { path: '', component: CourseInfoEditComponent },
-      { path: 'info', component: CourseInfoEditComponent }
+      { path: 'info', component: CourseInfoEditComponent },
+      { path: 'programs', component: CourseProgramEditComponent }
     ]
   }
 ];
@@ -47,6 +49,7 @@ const routes: Routes = [
     CourseInfoComponent,
     CourseProgramComponent,
     CourseInfoEditComponent,
+    CourseProgramEditComponent,
 
   ],
   imports: [

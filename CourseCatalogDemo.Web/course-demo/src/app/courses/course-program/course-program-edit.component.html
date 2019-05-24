@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-md-5">
+    <h6>Available Programs</h6>
+    <dx-list
+      #availablePrograms
+      [height]="400"
+      [dataSource]="programs"
+      selectionMode="multiple"
+      [showSelectionControls]="true"
+      [searchEnabled]="true"
+      [searchExpr]="['name', 'programCode']"
+      searchMode="contains"
+      pageLoadMode="scrollBottom"
+      itemTemplate="data"
+    >
+      <div *dxTemplate="let item of 'data'">
+        <div>({{ item.programCode }}) {{ item.name }}</div>
+      </div>
+    </dx-list>
+  </div>
+  <div class="col align-self-center">
+    <div>
+      <button
+        class="btn btn-outline-primary btn-block"
+        [disabled]="!availablePrograms.selectedItems.length"
+        (click)="addProgram(availablePrograms)"
+      >
+        <i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div>
+      <button
+        class="btn btn-outline-primary btn-block"
+        (click)="removeProgram(currentPrograms)"
+        [disabled]="!currentPrograms.selectedItems.length"
+      >
+        <i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <h6>Assigned Programs</h6>
+    <dx-list
+      #currentPrograms
+      [height]="400"
+      [dataSource]="course.careerTechPrograms"
+      selectionMode="multiple"
+      [showSelectionControls]="true"
+      [searchEnabled]="true"
+      [searchExpr]="['name', 'programCode']"
+      searchMode="contains"
+      pageLoadMode="scrollBottom"
+      itemTemplate="data"
+      (onItemDeleting)="onItemDeleting($event)"
+    >
+      <div *dxTemplate="let item of 'data'">
+        <div>
+          <div>({{ item.programCode }}) {{ item.name }}</div>
+          <div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox1"
+                value="option1"
+              />
+              <label class="form-check-label" for="inlineCheckbox1">Foundation</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox2"
+                value="option2"
+              />
+              <label class="form-check-label" for="inlineCheckbox2">Elective</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox3"
+                value="option3"
+              />
+              <label class="form-check-label" for="inlineCheckbox3">Required</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dx-list>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <code>
+      <pre
+        >{{ course.careerTechPrograms | json }}
+      </pre>
+    </code>
+  </div>
+</div>
