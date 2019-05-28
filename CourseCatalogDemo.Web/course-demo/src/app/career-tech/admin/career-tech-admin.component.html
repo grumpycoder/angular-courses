@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header">
+    {{ pageTitle }}
+  </div>
+
+  <div class="card-body">
+    <div class="wizard">
+      <a [routerLink]="['clusters']" routerLinkActive="active">Clusters</a>
+      <a [routerLink]="['programs']" routerLinkActive="active">Programs</a>
+      <a [routerLink]="['creditials']" routerLinkActive="active">Creditials</a>
+    </div>
+
+    <!-- <button class="btn btn-primary" (click)="editCourse()">Edit</button> -->
+
+    <router-outlet></router-outlet>
+  </div>
+</div>

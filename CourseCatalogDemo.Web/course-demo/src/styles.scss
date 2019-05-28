@@ -4,8 +4,12 @@
 pre {
   background-color: gainsboro;
   // display: none;
+  display: block;
 }
 
+.wizard {
+  margin-bottom: 1em;
+}
 .wizard a {
   background: #efefef;
   display: inline-block;

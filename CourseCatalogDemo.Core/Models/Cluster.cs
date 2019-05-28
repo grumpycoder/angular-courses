@@ -1,4 +1,6 @@
-﻿namespace CourseCatalogDemo.Core.Models
+﻿using System.Collections.Generic;
+
+namespace CourseCatalogDemo.Core.Models
 {
     public class Cluster
     {
@@ -10,5 +12,6 @@
         public int? ClusterTypeId { get; set; }
         public int? BeginYear { get; set; }
         public int? EndYear { get; set; }
+        public List<CareerTechProgram> Programs { get; set; }
     }
 }

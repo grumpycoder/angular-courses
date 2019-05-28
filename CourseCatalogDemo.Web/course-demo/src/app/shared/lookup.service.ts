@@ -33,7 +33,16 @@ export class LookupService {
   getPrograms() {
     return PROGRAMS;
   }
+
+  getClusterTypes() {
+    return CLUSTERTYPES;
+  }
 }
+
+const CLUSTERTYPES = [
+  { id: 1, name: 'ALSDE' },
+  { id: 2, name: 'National' }
+];
 
 const PROGRAMS = [
   { id: 1, programCode: '001', name: '7th/8th Grade Agriscience' },

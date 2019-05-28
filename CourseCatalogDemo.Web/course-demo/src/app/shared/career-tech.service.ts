@@ -7,7 +7,7 @@ import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
 
 import { ICluster } from '../models/cluster';
-import { Program } from '../models/program';
+import { IProgram } from '../models/program';
 import { ICourse } from '../models/course';
 
 @Injectable({
@@ -35,6 +35,11 @@ export class CareerTechService {
     return this.http.get(this.url + '/clusters?year=2019');
   }
 
+  getClusterDetails(clusterCode): Observable<ICluster> {
+    // return this.http.get<ICourse>(this.url + '/' + id + '/edit/full');
+    return this.http.get<ICluster>(this.url + `clusters/code/${clusterCode}`);
+  }
+
   getProgramsDataSource() {
     return AspNetData.createStore({
       key: 'id',
@@ -45,12 +50,29 @@ export class CareerTechService {
     });
   }
 
-  getPrograms(): Observable<Program[]> {
-    return this.http.get<Program[]>(this.url + 'programs');
+  getPrograms(): Observable<IProgram[]> {
+    return this.http.get<IProgram[]>(this.url + 'programs');
   }
 
   getCourses(programCode: string): Observable<ICourse[]> {
     return this.http.get<ICourse[]>(`${this.url}programs/${programCode}/courses`);
+  }
+
+  saveCluster(cluster) {
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http
+      .put<ICluster>(this.url + '/clusters', cluster, options)
+      .pipe(catchError(this.handleError));
+  }
+
+  removeClusterProgram(cluster, program) {
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    const address = this.url + `clusters/${cluster.id}/${program.id}`;
+    console.log('address', address);
+
+    return this.http
+      .delete(address, options)
+      .pipe(catchError(this.handleError));
   }
 
   addProgramCourse(course, program) {

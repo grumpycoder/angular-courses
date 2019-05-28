@@ -27,6 +27,10 @@ export class CourseInfoEditComponent implements OnInit {
       this.course = data.resolvedData.course;
     });
 
+    this.courseService.getCourseEdit(this.course.id).subscribe(data => {
+      console.log('course data', data);
+      this.course = data;
+    })
     this.schoolYears = this.lookup.getServiceYears();
     this.creditTypes = this.lookup.getCreditTypes();
     this.courseTypes = this.lookup.getCourseTypes();

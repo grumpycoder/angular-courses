@@ -38,10 +38,17 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         }
 
 
-        [HttpGet, Route("clusters/{id}")]
-        public async Task<object> Cluster(int id)
+        [HttpGet, Route("clusters/code/{clusterCode}")]
+        public async Task<object> Cluster(string clusterCode)
         {
-            var dto = await _context.Clusters.FirstOrDefaultAsync(x => x.Id == id);
+            var dto = await _context.Clusters.Include(x => x.Programs).FirstOrDefaultAsync(x => x.ClusterCode == clusterCode);
+            return Ok(dto);
+        }
+
+        [HttpGet, Route("clusters/{id}")]
+        public async Task<object> Clusters(int id)
+        {
+            var dto = await _context.Clusters.Include(x => x.Programs).FirstOrDefaultAsync(x => x.Id == id);
             return Ok(dto);
         }
 
@@ -54,6 +61,16 @@ namespace CourseCatalogDemo.Web.Controllers.Api
 
             await _context.SaveChangesAsync();
 
+            return Ok(dto);
+        }
+
+        [HttpGet, Route("clusters/{clusterCode}/programs")]
+        public async Task<object> ClusterPrograms(string clusterCode)
+        {
+            var dto = await _context.CareerTechPrograms
+                .Where(x => x.Cluster.ClusterCode == clusterCode)
+                .ProjectTo<ProgramDto>()
+                .ToListAsync();
             return Ok(dto);
         }
 
@@ -96,14 +113,14 @@ namespace CourseCatalogDemo.Web.Controllers.Api
 
             var dto = await _courseContext.Courses
                 .Where(x => x.CareerTechPrograms.Any(c => c.ProgramCode == programCode))
-                .ProjectTo<CourseDto>().ToListAsync(); 
+                .ProjectTo<CourseDto>().ToListAsync();
 
 
             CareerTechProgram d = await _context.CareerTechPrograms
                 .Include(x => x.Courses)
                 .FirstOrDefaultAsync(x => x.ProgramCode == programCode && x.SchoolYear == 2017);
-            
-            
+
+
             //var dto = Mapper.Map<List<CourseDto>>(d.Courses);
 
             return Ok(dto);
@@ -111,6 +128,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
 
         //[HttpDelete, Route("programs/{programId}/{courseId}")]
         //public async Task<object> RemoveProgramCourse(int programId, int courseId)
+
         [HttpDelete, Route("programs/{programId}/{courseId}")]
         public async Task<object> RemoveProgramCourse(int programId, int courseId)
         {
@@ -148,7 +166,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
             return Ok();
 
         }
-
+        
         [HttpPut, Route("programs/{programId}/{courseId}")]
         public async Task<object> UpdateProgramCourse(ProgramCourseEditDto dto)
         {
@@ -166,6 +184,22 @@ namespace CourseCatalogDemo.Web.Controllers.Api
             _context.CareerTechProgramCourses.AddOrUpdate(existing);
 
             await _context.SaveChangesAsync();
+            return Ok();
+
+        }
+
+        [HttpDelete, Route("clusters/{clusterId}/{programId}")]
+        public async Task<object> RemoveClusterProgram(int clusterId, int programId)
+        {
+
+            var program = await _context.CareerTechPrograms.FirstOrDefaultAsync(x => x.Id == programId);
+
+            if (program == null) return NotFound();
+
+            _context.CareerTechPrograms.Remove(program);
+
+            await _context.SaveChangesAsync();
+
             return Ok();
 
         }
