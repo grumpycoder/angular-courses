@@ -11,6 +11,9 @@ namespace CourseCatalogDemo.Core.Models
         public int? BeginYear { get; set; }
         public int? EndYear { get; set; }
 
+        public ProgramType ProgramType { get; set; }
+        public int? ProgramTypeId { get; set; }
+
         public int? ClusterId { get; set; }
         public Cluster Cluster { get; set; }
         public List<Course> Courses { get; set; } = new List<Course>();

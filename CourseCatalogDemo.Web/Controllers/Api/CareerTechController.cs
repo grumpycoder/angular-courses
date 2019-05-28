@@ -78,10 +78,34 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         public async Task<object> Programs()
         {
             //var schoolYear = 2017;
-            var programs = await _context.CareerTechPrograms.Where(x => x.SchoolYear == 2017).ProjectTo<ProgramDto>().ToListAsync();
+            var programs = await _context.CareerTechPrograms
+                .Where(x => x.SchoolYear == 2017)
+                .ProjectTo<ProgramDto>().ToListAsync();
             return Ok(programs);
         }
 
+        [HttpPut, Route("programs")]
+        public async Task<object> Put(CareerTechProgram dto)
+        {
+            var cluster = await _context.CareerTechPrograms.FindAsync(dto.Id);
+
+            //Mapper.Map(dto, cluster);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(dto);
+        }
+
+
+        [HttpGet, Route("programs/{id}/edit")]
+        public async Task<object> GetEditPrograms(int id)
+        {
+            //var schoolYear = 2017;
+            var programs = await _context.CareerTechPrograms
+                .Include(x => x.ProgramType)
+                .Where(x => x.Id == id).FirstOrDefaultAsync();
+            return Ok(programs);
+        }
 
         //[HttpGet, Route("programs/{schoolYear}")]
         //public async Task<object> Programs(int? schoolYear)

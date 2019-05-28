@@ -1,3 +1,110 @@
 <p>
   programs works!
 </p>
+
+<dx-select-box
+  [dataSource]="data"
+  placeholder="Choose Program"
+  displayExpr="programName"
+  [showClearButton]="true"
+  [searchEnabled]="true"
+  [searchExpr]="['clusterName', 'programName']"
+  [grouped]="true"
+  (selectedItemChange)="onSelectionChanged($event)"
+>
+</dx-select-box>
+
+<div class="row">
+  <div class="col-12">
+    <div *ngIf="program">
+      <form novalidate #programForm="ngForm" (ngSubmit)="onSubmit(programForm.value)">
+        <fieldset>
+          <div class="form-group row">
+            <label for="programName" class="col-md-2 col-form-label">Name</label>
+            <div class="col-md-8">
+              <input
+                type="text"
+                class="form-control"
+                id="programName"
+                name="programName"
+                placeholder="Program Name (required)"
+                [(ngModel)]="program.name"
+                minlength="6"
+                #programName="ngModel"
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="programCode" class="col-md-2 col-form-label">Program Code</label>
+            <div class="col-md-8">
+              <input
+                type="text"
+                class="form-control"
+                id="programCode"
+                name="programCode"
+                placeholder="Program Code (required)"
+                [(ngModel)]="program.programCode"
+                minlength="6"
+                #programCode="ngModel"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="programTypeId" class="col-md-2 col-form-label">Program Type</label>
+            <div class="col-md-8">
+              <select
+                class="form-control"
+                [(ngModel)]="program.programTypeId"
+                name="programTypeId"
+                #programTypeId="ngModel"
+              >
+                <option *ngFor="let t of programTypes" [value]="t.id">{{ t.name }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="beginYear" class="col-md-2 col-form-label">Begin Service</label>
+            <div class="col-md-8">
+              <select
+                class="form-control"
+                [(ngModel)]="program.beginYear"
+                name="beginYear"
+                #beginYear="ngModel"
+              >
+                <option *ngFor="let year of schoolYears" [value]="year.year">{{
+                  year.year
+                }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="endYear" class="col-md-2 col-form-label">End Service</label>
+            <div class="col-md-8">
+              <select
+                class="form-control"
+                [(ngModel)]="program.endYear"
+                name="endYear"
+                #endYear="ngModel"
+              >
+                <option *ngFor="let year of schoolYears" [value]="year.year">{{
+                  year.year
+                }}</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <button class="btn btn-primary" type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <pre>
+      {{ selectedProgram | json }}
+    </pre>
+  </div>
+</div>

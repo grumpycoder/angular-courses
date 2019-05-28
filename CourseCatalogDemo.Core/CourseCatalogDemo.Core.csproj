@@ -67,6 +67,7 @@
     <Compile Include="Models\CreditType.cs" />
     <Compile Include="Models\DeliveryType.cs" />
     <Compile Include="Models\Grade.cs" />
+    <Compile Include="Models\ProgramType.cs" />
     <Compile Include="Models\SchoolYear.cs" />
     <Compile Include="Models\SubjectArea.cs" />
     <Compile Include="Profiles\ClusterProfile.cs" />

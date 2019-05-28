@@ -56,6 +56,7 @@
     <Compile Include="Persistence\EntityConfigurations\ClusterConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\ClusterTypeConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\CourseConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\ProgramTypeConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\CourseTypeConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\CourseViewConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\CreditTypeConfiguration.cs" />

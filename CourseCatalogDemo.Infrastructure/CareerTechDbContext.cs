@@ -38,6 +38,7 @@ namespace CourseCatalogDemo.Infrastructure
             modelBuilder.Configurations.Add(new CareerTechProgramConfiguration());
             modelBuilder.Configurations.Add(new ClusterTypeConfiguration());
             modelBuilder.Configurations.Add(new ClusterConfiguration());
+            modelBuilder.Configurations.Add(new ProgramTypeConfiguration());
             //modelBuilder.Configurations.Add(new CareerTechProgramCourseConfiguration());
         }
     }

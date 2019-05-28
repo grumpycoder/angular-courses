@@ -37,7 +37,17 @@ export class LookupService {
   getClusterTypes() {
     return CLUSTERTYPES;
   }
+
+  getProgramTypes() {
+    return PROGRAMTYPES;
+  }
 }
+
+const PROGRAMTYPES = [
+  { id: 1, name: 'CO-OP', code: '001' },
+  { id: 2, name: 'RegularCT/Completer', code: '002' },
+  { id: 3, name: 'MiddleSchool', code: '003' }
+];
 
 const CLUSTERTYPES = [
   { id: 1, name: 'ALSDE' },

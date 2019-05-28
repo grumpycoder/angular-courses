@@ -54,6 +54,13 @@ export class CareerTechService {
     return this.http.get<IProgram[]>(this.url + 'programs');
   }
 
+  getProgramEdit(id: number): any {
+    let url = `${this.url}programs/${id}/edit`;
+    console.log(url);
+
+    return this.http.get<IProgram>(url);
+  }
+
   getCourses(programCode: string): Observable<ICourse[]> {
     return this.http.get<ICourse[]>(`${this.url}programs/${programCode}/courses`);
   }
@@ -62,6 +69,13 @@ export class CareerTechService {
     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     return this.http
       .put<ICluster>(this.url + '/clusters', cluster, options)
+      .pipe(catchError(this.handleError));
+  }
+
+  saveProgram(program) {
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http
+      .put<IProgram>(this.url + '/programs', program, options)
       .pipe(catchError(this.handleError));
   }
 
