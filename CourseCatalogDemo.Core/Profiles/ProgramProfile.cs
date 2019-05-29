@@ -8,7 +8,7 @@ namespace CourseCatalogDemo.Core.Profiles
     {
         public ProgramProfile()
         {
-            CreateMap<CareerTechProgram, ProgramDto>()
+            CreateMap<Program, ProgramDto>()
                 .ForMember(d => d.ProgramId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(d => d.ClusterId, opt => opt.MapFrom(src => src.Cluster.Id))
                 .ForMember(d => d.ProgramName, opt => opt.MapFrom(src => src.Name))
@@ -17,7 +17,12 @@ namespace CourseCatalogDemo.Core.Profiles
                 .ForMember(d => d.ClusterName, opt => opt.MapFrom(src => src.Cluster.Name))
                 ;
 
-            CreateMap<ProgramEditDto, CareerTechProgram>();
+            CreateMap<ProgramEditDto, Program>();
+
+            CreateMap<Credential, CredentialDto>()
+                .ForMember(d => d.CredentialTypeName, opt => opt.MapFrom(src => src.CredentialType.Name))
+                .ForMember(d => d.CredentialTypeCode, opt => opt.MapFrom(src => src.CredentialType.CredentialTypeCode))
+                ;
 
         }
 

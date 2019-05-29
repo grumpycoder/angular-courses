@@ -176,10 +176,25 @@
     >
   </div>
 </div>
+
+<div class="row" *ngIf="selectedProgram">
+  <div class="col-4">
+    <div>
+      <span class="title">Credentials</span>
+    </div>
+    <div>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let credential of selectedProgram.credentials">
+          {{ credential.credentialCode }} - {{ credential.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-12">
     <pre>
-      {{ courseList | json }}
+      {{ selectedProgram | json }}
     </pre>
   </div>
 </div>

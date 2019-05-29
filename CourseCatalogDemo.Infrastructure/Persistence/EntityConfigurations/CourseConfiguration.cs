@@ -23,7 +23,7 @@ namespace CourseCatalogDemo.Infrastructure.Persistence.EntityConfigurations
             Property(s => s.SubjectAreaId).HasColumnName("CourseSubjectAreaId");
 
 
-            //HasMany<CareerTechProgram>(s => s.CareerTechPrograms)
+            //HasMany<Program>(s => s.Programs)
             //    .WithMany(c => c.Courses)
             //    .Map(x =>
             //    {

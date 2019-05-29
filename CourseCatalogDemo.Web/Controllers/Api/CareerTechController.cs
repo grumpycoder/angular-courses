@@ -67,7 +67,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         [HttpGet, Route("clusters/{clusterCode}/programs")]
         public async Task<object> ClusterPrograms(string clusterCode)
         {
-            var dto = await _context.CareerTechPrograms
+            var dto = await _context.Programs
                 .Where(x => x.Cluster.ClusterCode == clusterCode)
                 .ProjectTo<ProgramDto>()
                 .ToListAsync();
@@ -78,16 +78,16 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         public async Task<object> Programs()
         {
             //var schoolYear = 2017;
-            var programs = await _context.CareerTechPrograms
+            var programs = await _context.Programs
                 .Where(x => x.SchoolYear == 2017)
                 .ProjectTo<ProgramDto>().ToListAsync();
             return Ok(programs);
         }
 
         [HttpPut, Route("programs")]
-        public async Task<object> Put(CareerTechProgram dto)
+        public async Task<object> Put(Program dto)
         {
-            var cluster = await _context.CareerTechPrograms.FindAsync(dto.Id);
+            var cluster = await _context.Programs.FindAsync(dto.Id);
 
             //Mapper.Map(dto, cluster);
 
@@ -101,7 +101,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         public async Task<object> GetEditPrograms(int id)
         {
             //var schoolYear = 2017;
-            var programs = await _context.CareerTechPrograms
+            var programs = await _context.Programs
                 .Include(x => x.ProgramType)
                 .Where(x => x.Id == id).FirstOrDefaultAsync();
             return Ok(programs);
@@ -111,14 +111,14 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         //public async Task<object> Programs(int? schoolYear)
         //{
         //    //var schoolYear = 2017;
-        //    var programs = await _context.CareerTechPrograms.Where(x => x.SchoolYear == schoolYear).ProjectTo<ProgramDto>().ToListAsync();
+        //    var programs = await _context.Programs.Where(x => x.SchoolYear == schoolYear).ProjectTo<ProgramDto>().ToListAsync();
         //    return Ok(programs);
         //}
 
         //[HttpGet, Route("programs/{schoolYear}/{programCode}/courses")]
         //public async Task<object> Courses(int schoolYear, string programCode)
         //{
-        //    var program = await _context.CareerTechPrograms.Include(x => x.Courses).FirstOrDefaultAsync(x => x.ProgramCode == programCode && x.SchoolYear == schoolYear);
+        //    var program = await _context.Programs.Include(x => x.Courses).FirstOrDefaultAsync(x => x.ProgramCode == programCode && x.SchoolYear == schoolYear);
         //    return Ok(program);
         //}
 
@@ -128,7 +128,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         {
 
             //var dto = await _courseContext.Courses
-            //    .Where(x => x.CareerTechPrograms.Any(c => c.ProgramCode == programCode))
+            //    .Where(x => x.Programs.Any(c => c.ProgramCode == programCode))
             //    .ProjectTo<CourseDto>().ToListAsync();
 
             var dto = await _courseContext.Courses
@@ -145,11 +145,11 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         public async Task<object> RemoveProgramCourse(int programId, int courseId)
         {
 
-            var link = await _context.CareerTechProgramCourses.FirstOrDefaultAsync(x => x.CourseId == courseId && x.ProgramId == programId);
+            var link = await _context.ProgramCourses.FirstOrDefaultAsync(x => x.CourseId == courseId && x.ProgramId == programId);
 
             if (link == null) return NotFound();
 
-            _context.CareerTechProgramCourses.Remove(link);
+            _context.ProgramCourses.Remove(link);
 
             await _context.SaveChangesAsync();
 
@@ -162,17 +162,17 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         {
 
             var existing =
-                _context.CareerTechProgramCourses.Any(x => x.ProgramId == programId && x.CourseId == courseId);
+                _context.ProgramCourses.Any(x => x.ProgramId == programId && x.CourseId == courseId);
 
             if (existing) return BadRequest("Course already assigned to program");
 
-            var link = new CareerTechProgramCourse()
+            var link = new ProgramCourse()
             {
                 CourseId = courseId,
                 ProgramId = programId,
                 ModifyUser = "mlawrence" //TODO: Get auth user
             };
-            _context.CareerTechProgramCourses.Add(link);
+            _context.ProgramCourses.Add(link);
 
             await _context.SaveChangesAsync();
             return Ok();
@@ -184,7 +184,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         {
 
             var existing = await
-                _context.CareerTechProgramCourses.FirstOrDefaultAsync(x => x.ProgramId == dto.ProgramId && x.CourseId == dto.CourseId);
+                _context.ProgramCourses.FirstOrDefaultAsync(x => x.ProgramId == dto.ProgramId && x.CourseId == dto.CourseId);
 
             if (existing == null) return NotFound();
 
@@ -193,7 +193,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
             existing.IsFoundation = dto.IsFoundation;
             existing.IsRequired = dto.IsRequired;
 
-            _context.CareerTechProgramCourses.AddOrUpdate(existing);
+            _context.ProgramCourses.AddOrUpdate(existing);
 
             await _context.SaveChangesAsync();
             return Ok();
@@ -204,11 +204,11 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         public async Task<object> RemoveClusterProgram(int clusterId, int programId)
         {
 
-            var program = await _context.CareerTechPrograms.FirstOrDefaultAsync(x => x.Id == programId);
+            var program = await _context.Programs.FirstOrDefaultAsync(x => x.Id == programId);
 
             if (program == null) return NotFound();
 
-            _context.CareerTechPrograms.Remove(program);
+            _context.Programs.Remove(program);
 
             await _context.SaveChangesAsync();
 

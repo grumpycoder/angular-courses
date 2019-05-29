@@ -42,7 +42,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         public async Task<object> GetFull(int id)
         {
             //var dto = await _context.Courses
-            //    .Include(x => x.CareerTechPrograms).ProjectTo<CourseDto>()
+            //    .Include(x => x.Programs).ProjectTo<CourseDto>()
             //    .FirstOrDefaultAsync(c => c.Id == id);
 
             var dto = await _context.Courses
@@ -64,7 +64,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         public async Task<object> GetEditFull(int id)
         {
             
-            //var dto = await _context.Courses.Include(x => x.CareerTechPrograms).FirstOrDefaultAsync(c => c.Id == id);
+            //var dto = await _context.Courses.Include(x => x.Programs).FirstOrDefaultAsync(c => c.Id == id);
             var dto = await _context.Courses.Include(x => x.ProgramCourses).FirstOrDefaultAsync(c => c.Id == id);
 
             return Ok(dto);

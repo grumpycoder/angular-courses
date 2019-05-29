@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace CourseCatalogDemo.Infrastructure.Persistence.EntityConfigurations
 {
-    public class CareerTechProgramCourseConfiguration : EntityTypeConfiguration<CareerTechProgramCourse>
+    public class ProgramCourseConfiguration : EntityTypeConfiguration<ProgramCourse>
     {
-        public CareerTechProgramCourseConfiguration()
+        public ProgramCourseConfiguration()
         {
             ToTable("ProgramCourse", "CareerTech");
             Property(s => s.Id).HasColumnName("ProgramCourseId");

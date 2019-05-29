@@ -20,9 +20,10 @@ namespace CourseCatalogDemo.Infrastructure
             return new CareerTechDbContext();
         }
 
-        public DbSet<CareerTechProgram> CareerTechPrograms { get; set; }
+        public DbSet<Program> Programs { get; set; }
         public DbSet<Cluster> Clusters { get; set; }
-        public DbSet<CareerTechProgramCourse> CareerTechProgramCourses { get; set; }
+        public DbSet<Credential> Credentials { get; set; }
+        public DbSet<ProgramCourse> ProgramCourses { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -35,11 +36,13 @@ namespace CourseCatalogDemo.Infrastructure
             modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("smalldatetime"));
 
             modelBuilder.Configurations.Add(new CourseConfiguration());
-            modelBuilder.Configurations.Add(new CareerTechProgramConfiguration());
+            modelBuilder.Configurations.Add(new ProgramConfiguration());
             modelBuilder.Configurations.Add(new ClusterTypeConfiguration());
             modelBuilder.Configurations.Add(new ClusterConfiguration());
             modelBuilder.Configurations.Add(new ProgramTypeConfiguration());
-            modelBuilder.Configurations.Add(new CareerTechProgramCourseConfiguration());
+            modelBuilder.Configurations.Add(new ProgramCourseConfiguration());
+            modelBuilder.Configurations.Add(new CredentialConfiguration());
+            modelBuilder.Configurations.Add(new CredentialTypeConfiguration());
         }
     }
 }

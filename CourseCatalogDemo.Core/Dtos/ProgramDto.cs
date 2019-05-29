@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CourseCatalogDemo.Core.Models;
 
 namespace CourseCatalogDemo.Core.Dtos
 {
@@ -16,6 +17,6 @@ namespace CourseCatalogDemo.Core.Dtos
         public int? BeginYear { get; set; }
         public int? EndYear { get; set; }
 
-        
+        public List<CredentialDto> Credentials { get; set; }
     }
 }

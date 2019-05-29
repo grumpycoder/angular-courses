@@ -34,7 +34,7 @@ namespace CourseCatalogDemo.Core.Models
         public ClassType ClassType { get; set; }
         public SubjectArea SubjectArea { get; set; }
 
-        public virtual ICollection<CareerTechProgramCourse> ProgramCourses { get; set; }
+        public virtual ICollection<ProgramCourse> ProgramCourses { get; set; }
 
 
     }

@@ -2,7 +2,7 @@
 
 namespace CourseCatalogDemo.Core.Models
 {
-    public class CareerTechProgram
+    public class Program
     {
         public int Id { get; set; }
         public int SchoolYear { get; set; }
@@ -18,6 +18,8 @@ namespace CourseCatalogDemo.Core.Models
         public Cluster Cluster { get; set; }
         public List<Course> Courses { get; set; } = new List<Course>();
 
-        public virtual ICollection<CareerTechProgramCourse> ProgramCourses { get; set; }
+        public virtual ICollection<ProgramCourse> ProgramCourses { get; set; }
+
+        public List<Credential> Credentials { get; set; }
     }
 }

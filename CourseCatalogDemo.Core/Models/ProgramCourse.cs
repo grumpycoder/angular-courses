@@ -2,7 +2,7 @@
 
 namespace CourseCatalogDemo.Core.Models
 {
-    public class CareerTechProgramCourse
+    public class ProgramCourse
     {
         public int Id { get; set; }
         public int ProgramId { get; set; }
@@ -16,6 +16,6 @@ namespace CourseCatalogDemo.Core.Models
         public string ModifyUser { get; set; }
 
         public virtual Course Course { get; set; }
-        public virtual CareerTechProgram Program { get; set; }
+        public virtual Program Program { get; set; }
     }
 }

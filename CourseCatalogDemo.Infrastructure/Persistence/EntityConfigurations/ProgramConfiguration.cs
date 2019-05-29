@@ -3,17 +3,25 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace CourseCatalogDemo.Infrastructure.Persistence.EntityConfigurations
 {
-    public class CareerTechProgramConfiguration : EntityTypeConfiguration<CareerTechProgram>
+    public class ProgramConfiguration : EntityTypeConfiguration<Program>
     {
-        public CareerTechProgramConfiguration()
+        public ProgramConfiguration()
         {
             ToTable("Program", "CareerTech");
             Property(s => s.Id).HasColumnName("ProgramId");
             Property(s => s.Name).HasColumnName("Program");
 
+            HasMany<Credential>(s => s.Credentials)
+                .WithMany(c => c.Programs)
+                .Map(x =>
+                {
+                    x.MapLeftKey("ProgramId");
+                    x.MapRightKey("CredentialId");
+                    x.ToTable("ProgramCredential", "CareerTech");
+                });
 
             //HasMany<Course>(s => s.Courses)
-            //    .WithMany(c => c.CareerTechPrograms)
+            //    .WithMany(c => c.Programs)
             //    .Map(x =>
             //    {
             //        x.MapLeftKey("ProgramId");
@@ -21,15 +29,15 @@ namespace CourseCatalogDemo.Infrastructure.Persistence.EntityConfigurations
             //        x.ToTable("ProgramCourse", "CareerTech");
             //    });
 
-            //HasMany<CareerTechProgramCourse>(s => s.CareerTechProgramCourses)
-            //    .WithMany(c => c.CareerTechPrograms)
+            //HasMany<ProgramCourse>(s => s.ProgramCourses)
+            //    .WithMany(c => c.Programs)
             //    .Map(x =>
             //    {
             //        x.MapLeftKey("ProgramId");
             //        x.MapRightKey("CourseId");
             //        x.ToTable("ProgramCourse", "CareerTech");
             //    });
- 
+
         }
     }
 }

@@ -50,8 +50,10 @@
   <ItemGroup>
     <Compile Include="CareerTechDbContext.cs" />
     <Compile Include="CourseDbContext.cs" />
-    <Compile Include="Persistence\EntityConfigurations\CareerTechProgramCourseConfiguration.cs" />
-    <Compile Include="Persistence\EntityConfigurations\CareerTechProgramConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\CredentialConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\CredentialTypeConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\ProgramCourseConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\ProgramConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\ClassTypeConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\ClusterConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\ClusterTypeConfiguration.cs" />
