@@ -1,4 +1,6 @@
-﻿namespace CourseCatalogDemo.Core.Models
+﻿using System.Collections.Generic;
+
+namespace CourseCatalogDemo.Core.Models
 {
     public class CareerTechProgramCourse
     {
@@ -13,5 +15,7 @@
 
         public string ModifyUser { get; set; }
 
+        public virtual Course Course { get; set; }
+        public virtual CareerTechProgram Program { get; set; }
     }
 }

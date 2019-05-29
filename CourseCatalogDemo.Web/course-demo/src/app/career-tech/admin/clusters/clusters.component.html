@@ -123,6 +123,16 @@
 
 <div class="row">
   <div class="col-12">
+    <span class="title">Programs</span>
+    <ul *ngIf="selectedCluster" class="list-group">
+      <li *ngFor="let program of selectedCluster.programs" class="list-group-item">
+        {{ program.name }}
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
     <p>
       <code>
         <pre>

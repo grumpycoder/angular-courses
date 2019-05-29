@@ -41,11 +41,13 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         [HttpGet, Route("{id}/full")]
         public async Task<object> GetFull(int id)
         {
-            //var dto = await _context.Courses.Include(x => x.BeginServiceYear).FirstOrDefaultAsync(c => c.Id == id);
-            var dto = await _context.Courses
-                .Include(x => x.CareerTechPrograms).ProjectTo<CourseDto>()
-                .FirstOrDefaultAsync(c => c.Id == id);
+            //var dto = await _context.Courses
+            //    .Include(x => x.CareerTechPrograms).ProjectTo<CourseDto>()
+            //    .FirstOrDefaultAsync(c => c.Id == id);
 
+            var dto = await _context.Courses
+                .Include(x => x.ProgramCourses).ProjectTo<CourseDto>()
+                .FirstOrDefaultAsync(c => c.Id == id);
             return Ok(dto);
         }
 
@@ -61,8 +63,9 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         [HttpGet, Route("{id}/edit/full")]
         public async Task<object> GetEditFull(int id)
         {
-            //var dto = await _context.Courses.Include(x => x.BeginServiceYear).FirstOrDefaultAsync(c => c.Id == id);
-            var dto = await _context.Courses.Include(x => x.CareerTechPrograms).FirstOrDefaultAsync(c => c.Id == id);
+            
+            //var dto = await _context.Courses.Include(x => x.CareerTechPrograms).FirstOrDefaultAsync(c => c.Id == id);
+            var dto = await _context.Courses.Include(x => x.ProgramCourses).FirstOrDefaultAsync(c => c.Id == id);
 
             return Ok(dto);
         }

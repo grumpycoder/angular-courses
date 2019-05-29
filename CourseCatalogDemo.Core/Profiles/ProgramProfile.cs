@@ -15,9 +15,11 @@ namespace CourseCatalogDemo.Core.Profiles
                 .ForMember(d => d.ProgramCode, opt => opt.MapFrom(src => src.ProgramCode))
                 .ForMember(d => d.ClusterCode, opt => opt.MapFrom(src => src.Cluster.ClusterCode))
                 .ForMember(d => d.ClusterName, opt => opt.MapFrom(src => src.Cluster.Name))
-
                 ;
 
+            CreateMap<ProgramEditDto, CareerTechProgram>();
+
         }
+
     }
 }

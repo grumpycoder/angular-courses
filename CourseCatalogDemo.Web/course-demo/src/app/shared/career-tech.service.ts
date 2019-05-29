@@ -7,7 +7,7 @@ import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
 
 import { ICluster } from '../models/cluster';
-import { IProgram } from '../models/program';
+import { IProgram, IProgramEdit, ProgramCourse } from '../models/program';
 import { ICourse } from '../models/course';
 
 @Injectable({
@@ -26,10 +26,66 @@ export class CareerTechService {
       //    ajaxOptions.xhrFields = { withCredentials: true };
       //  }
     });
-
-
   }
 
+  private testApi = 'http://localhost:62634/api/test';
+  private options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+
+  Clusters() {
+    return this.http.get<ICluster[]>(this.testApi + '/clusters/full');
+  }
+
+  ClusterEdit(cluster) {
+    return this.http.get<ICluster>(`${this.testApi}/clusters/${cluster.clusterCode}/edit`)
+  }
+
+  SaveCluster(cluster) {
+    return this.http
+      .put<ICluster>(`${this.url}/clusters'`, cluster, this.options)
+      .pipe(catchError(this.handleError));
+  }
+
+  Programs() {
+    return this.http.get<IProgram[]>(`${this.testApi}/programs`);
+  }
+
+  ProgramCourses(programCode: string): Observable<ICourse[]> {
+    return this.http.get<ICourse[]>(`${this.testApi}/programs/${programCode}/courses`);
+  }
+
+  ProgramEdit(programCode: string) {
+    return this.http.get<IProgramEdit>(`${this.testApi}/programs/${programCode}/edit`);
+  }
+
+  SaveProgram(program) {
+    return this.http
+      .put<IProgram>(this.testApi + '/programs', program, this.options)
+      .pipe(catchError(this.handleError));
+  }
+
+  AddProgramCourse(program, course) {
+    const dto = new ProgramCourse();
+    dto.programId = program.programId;
+    dto.courseId = course.id;
+    dto.isFoundation = false;
+    dto.isRequired = false;
+    dto.isElective = false;
+    dto.isActive = false;
+    const address = `${this.testApi}/programs/${program.programCode}/${course.courseCode}`;
+    return this.http
+      .post(address, dto, this.options)
+      .pipe(catchError(this.handleError));
+  }
+
+  RemoveProgramCourse(program, course) {
+    const address = `${this.testApi}/programs/${program.programCode}/${course.courseCode}`;
+    return this.http
+      .delete(address, this.options)
+      .pipe(catchError(this.handleError));
+  }
+
+
+  // OLD CODE
   getClusters() {
     // return this.http.get<ICourse>(this.url + '/' + id + '/edit/full');
     return this.http.get(this.url + '/clusters?year=2019');
@@ -37,7 +93,7 @@ export class CareerTechService {
 
   getClusterDetails(clusterCode): Observable<ICluster> {
     // return this.http.get<ICourse>(this.url + '/' + id + '/edit/full');
-    return this.http.get<ICluster>(this.url + `clusters/code/${clusterCode}`);
+    return this.http.get<ICluster>(this.url + `clusters / code / ${clusterCode}`);
   }
 
   getProgramsDataSource() {
@@ -55,14 +111,14 @@ export class CareerTechService {
   }
 
   getProgramEdit(id: number): any {
-    let url = `${this.url}programs/${id}/edit`;
+    let url = `${this.url}programs / ${id} / edit`;
     console.log(url);
 
     return this.http.get<IProgram>(url);
   }
 
   getCourses(programCode: string): Observable<ICourse[]> {
-    return this.http.get<ICourse[]>(`${this.url}programs/${programCode}/courses`);
+    return this.http.get<ICourse[]>(`${this.url}programs / ${programCode} / courses`);
   }
 
   saveCluster(cluster) {
@@ -81,7 +137,7 @@ export class CareerTechService {
 
   removeClusterProgram(cluster, program) {
     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    const address = this.url + `clusters/${cluster.id}/${program.id}`;
+    const address = this.url + `clusters / ${cluster.id} / ${program.id}`;
     console.log('address', address);
 
     return this.http

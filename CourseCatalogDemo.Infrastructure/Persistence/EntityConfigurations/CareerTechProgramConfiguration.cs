@@ -12,14 +12,24 @@ namespace CourseCatalogDemo.Infrastructure.Persistence.EntityConfigurations
             Property(s => s.Name).HasColumnName("Program");
 
 
-            HasMany<Course>(s => s.Courses)
-                .WithMany(c => c.CareerTechPrograms)
-                .Map(x =>
-                {
-                    x.MapLeftKey("ProgramId");
-                    x.MapRightKey("CourseId");
-                    x.ToTable("ProgramCourse", "CareerTech");
-                });
+            //HasMany<Course>(s => s.Courses)
+            //    .WithMany(c => c.CareerTechPrograms)
+            //    .Map(x =>
+            //    {
+            //        x.MapLeftKey("ProgramId");
+            //        x.MapRightKey("CourseId");
+            //        x.ToTable("ProgramCourse", "CareerTech");
+            //    });
+
+            //HasMany<CareerTechProgramCourse>(s => s.CareerTechProgramCourses)
+            //    .WithMany(c => c.CareerTechPrograms)
+            //    .Map(x =>
+            //    {
+            //        x.MapLeftKey("ProgramId");
+            //        x.MapRightKey("CourseId");
+            //        x.ToTable("ProgramCourse", "CareerTech");
+            //    });
+ 
         }
     }
 }

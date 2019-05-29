@@ -28,12 +28,14 @@ namespace CourseCatalogDemo.Core.Models
 
         public Grade LowGrade { get; set; }
         public Grade HighGrade { get; set; }
-        
+
         public CourseType CourseType { get; set; }
         public CreditType CreditType { get; set; }
         public ClassType ClassType { get; set; }
         public SubjectArea SubjectArea { get; set; }
 
-        public List<CareerTechProgram> CareerTechPrograms { get; set; }
+        public virtual ICollection<CareerTechProgramCourse> ProgramCourses { get; set; }
+
+
     }
 }

@@ -1,24 +1,39 @@
-<p>
-  programs works!
-</p>
-
-<dx-select-box
-  [dataSource]="data"
-  placeholder="Choose Program"
-  displayExpr="programName"
-  [showClearButton]="true"
-  [searchEnabled]="true"
-  [searchExpr]="['clusterName', 'programName']"
-  [grouped]="true"
-  (selectedItemChange)="onSelectionChanged($event)"
->
-</dx-select-box>
+<div class="row">
+  <div class="col-4">
+    <dx-select-box
+      [dataSource]="data"
+      placeholder="Choose Program"
+      displayExpr="programName"
+      [showClearButton]="true"
+      [searchEnabled]="true"
+      [searchExpr]="['clusterName', 'programName']"
+      [grouped]="true"
+      (selectedItemChange)="onSelectionChanged($event)"
+    >
+    </dx-select-box>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-12">
     <div *ngIf="program">
       <form novalidate #programForm="ngForm" (ngSubmit)="onSubmit(programForm.value)">
         <fieldset>
+          <div class="form-group row">
+            <label for="clusterId" class="col-md-2 col-form-label">Cluster</label>
+            <div class="col-md-8">
+              <select
+                class="form-control"
+                [(ngModel)]="program.clusterId"
+                name="clusterId"
+                #clusterId="ngModel"
+              >
+                <option *ngFor="let cluster of clusters" [value]="cluster.id">{{
+                  cluster.name
+                }}</option>
+              </select>
+            </div>
+          </div>
           <div class="form-group row">
             <label for="programName" class="col-md-2 col-form-label">Name</label>
             <div class="col-md-8">
@@ -102,9 +117,69 @@
 </div>
 
 <div class="row">
+  <div class="col-5">
+    <span class="title">Available Courses</span>
+    <dx-list
+      #availabeCourselist
+      [dataSource]="availableCourses"
+      [height]="250"
+      selectionMode="multiple"
+      [showSelectionControls]="true"
+      [searchEnabled]="true"
+      [searchExpr]="['name', 'courseCode']"
+      searchMode="contains"
+      pageLoadMode="scrollBottom"
+      itemTemplate="data"
+    >
+      <div *dxTemplate="let item of 'data'">
+        <div>{{ item.courseCode }} - {{ item.name }}</div>
+      </div>
+    </dx-list>
+  </div>
+  <div class="col align-self-center">
+    <div>
+      <button
+        class="btn btn-outline-primary btn-block"
+        [disabled]="!availabeCourselist.selectedItems.length"
+        (click)="addCourses(availabeCourselist)"
+      >
+        <i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div>
+      <button
+        class="btn btn-outline-primary btn-block"
+        [disabled]="!courselist.selectedItems.length"
+        (click)="removeCourses(courselist)"
+      >
+        <i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="col-5">
+    <span class="title">Assigned Courses</span>
+    <dx-list
+      #courselist
+      [dataSource]="courses"
+      [height]="250"
+      selectionMode="multiple"
+      [showSelectionControls]="true"
+      [searchEnabled]="true"
+      [searchExpr]="['name', 'courseCode']"
+      searchMode="contains"
+      itemTemplate="data"
+      pageLoadMode="scrollBottom"
+    >
+      <div *dxTemplate="let item of 'data'">
+        <div>{{ item.courseCode }} - {{ item.name }}</div>
+      </div></dx-list
+    >
+  </div>
+</div>
+<div class="row">
   <div class="col-12">
     <pre>
-      {{ selectedProgram | json }}
+      {{ courseList | json }}
     </pre>
   </div>
 </div>

@@ -28,6 +28,10 @@ export class CourseService {
     return this.dataSource;
   }
 
+  getCourses(): Observable<ICourse[]> {
+    return this.http.get<ICourse[]>(this.url);
+  }
+
   getCourse(id: number): any {
     return this.http.get<ICourse>(this.url + '/' + id + '/full');
   }

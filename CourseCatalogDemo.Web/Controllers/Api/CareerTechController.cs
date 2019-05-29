@@ -126,26 +126,14 @@ namespace CourseCatalogDemo.Web.Controllers.Api
         [HttpGet, Route("programs/{programCode}/courses")]
         public async Task<object> Courses(string programCode)
         {
-            //var program = await _context.CareerTechPrograms
-            //    .Include(x => x.Courses)
-            //    .FirstOrDefaultAsync(x => x.ProgramCode == programCode && x.SchoolYear == 2017);
 
-            //var d = await _context.CareerTechPrograms
-            //    .Include(x => x.Courses)
-            //    .Where(x => x.ProgramCode == programCode && x.SchoolYear == 2017)
-            //    .Select(x => x.Courses).ToListAsync();
+            //var dto = await _courseContext.Courses
+            //    .Where(x => x.CareerTechPrograms.Any(c => c.ProgramCode == programCode))
+            //    .ProjectTo<CourseDto>().ToListAsync();
 
             var dto = await _courseContext.Courses
-                .Where(x => x.CareerTechPrograms.Any(c => c.ProgramCode == programCode))
+                .Where(x => x.ProgramCourses.Any(c => c.Program.ProgramCode == programCode))
                 .ProjectTo<CourseDto>().ToListAsync();
-
-
-            CareerTechProgram d = await _context.CareerTechPrograms
-                .Include(x => x.Courses)
-                .FirstOrDefaultAsync(x => x.ProgramCode == programCode && x.SchoolYear == 2017);
-
-
-            //var dto = Mapper.Map<List<CourseDto>>(d.Courses);
 
             return Ok(dto);
         }

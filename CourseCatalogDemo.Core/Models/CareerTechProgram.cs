@@ -17,5 +17,7 @@ namespace CourseCatalogDemo.Core.Models
         public int? ClusterId { get; set; }
         public Cluster Cluster { get; set; }
         public List<Course> Courses { get; set; } = new List<Course>();
+
+        public virtual ICollection<CareerTechProgramCourse> ProgramCourses { get; set; }
     }
 }

@@ -38,6 +38,7 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,6 +57,7 @@
     <Compile Include="Dtos\CourseEditDto.cs" />
     <Compile Include="Dtos\ProgramCourseEditDto.cs" />
     <Compile Include="Dtos\ProgramDto.cs" />
+    <Compile Include="Dtos\ProgramEditDto.cs" />
     <Compile Include="Models\CareerTechProgram.cs" />
     <Compile Include="Models\CareerTechProgramCourse.cs" />
     <Compile Include="Models\ClassType.cs" />
