@@ -27,4 +27,14 @@ export class ProgramCourse {
   isActive: boolean;
 }
 
+export interface ICredential {
+  id: number;
+  credentialCode: string;
+  name: string;
+  credentialType: string;
+}
 
+export class ProgramCredential {
+  programId: number;
+  credentialId: number;
+}

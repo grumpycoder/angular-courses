@@ -7,7 +7,7 @@ import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
 
 import { ICluster } from '../models/cluster';
-import { IProgram, IProgramEdit, ProgramCourse } from '../models/program';
+import { IProgram, IProgramEdit, ProgramCourse, ICredential, ProgramCredential } from '../models/program';
 import { ICourse } from '../models/course';
 
 @Injectable({
@@ -57,6 +57,10 @@ export class CareerTechService {
     return this.http.get<IProgramEdit>(`${this.testApi}/programs/${programCode}/edit`);
   }
 
+  Credentials() {
+    return this.http.get<ICredential[]>(`${this.testApi}/credentials`);
+  }
+
   SaveProgram(program) {
     return this.http
       .put<IProgram>(this.testApi + '/programs', program, this.options)
@@ -84,6 +88,24 @@ export class CareerTechService {
       .pipe(catchError(this.handleError));
   }
 
+  AddProgramCredential(program, credential) {
+    console.log('add ', credential);
+    const dto = new ProgramCredential();
+    dto.programId = program.programId;
+    dto.credentialId = credential.id;
+
+    const address = `${this.testApi}/credentials/${program.programCode}`;
+    return this.http
+      .post(address, dto, this.options)
+      .pipe(catchError(this.handleError));
+  }
+
+  RemoveProgramCredential(program, credential) {
+    const address = `${this.testApi}/credentials/${program.programCode}/${credential.credentialCode}`;
+    return this.http
+      .delete(address, this.options)
+      .pipe(catchError(this.handleError));
+  }
 
   // OLD CODE
   getClusters() {

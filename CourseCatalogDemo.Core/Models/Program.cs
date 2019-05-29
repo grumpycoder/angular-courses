@@ -18,8 +18,8 @@ namespace CourseCatalogDemo.Core.Models
         public Cluster Cluster { get; set; }
         public List<Course> Courses { get; set; } = new List<Course>();
 
-        public virtual ICollection<ProgramCourse> ProgramCourses { get; set; }
+        public List<ProgramCourse> ProgramCourses { get; set; }
 
-        public List<Credential> Credentials { get; set; }
+        public List<ProgramCredential> Credentials { get; set; }
     }
 }

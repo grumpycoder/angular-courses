@@ -25,7 +25,7 @@ namespace CourseCatalogDemo.Infrastructure
         public DbSet<Credential> Credentials { get; set; }
         public DbSet<ProgramCourse> ProgramCourses { get; set; }
 
-
+        public DbSet<ProgramCredential> ProgramCredentials { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
@@ -43,6 +43,7 @@ namespace CourseCatalogDemo.Infrastructure
             modelBuilder.Configurations.Add(new ProgramCourseConfiguration());
             modelBuilder.Configurations.Add(new CredentialConfiguration());
             modelBuilder.Configurations.Add(new CredentialTypeConfiguration());
+            modelBuilder.Configurations.Add(new ProgramCredentialConfiguration());
         }
     }
 }

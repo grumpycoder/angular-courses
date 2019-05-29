@@ -9,7 +9,11 @@
       [searchExpr]="['clusterName', 'programName']"
       [grouped]="true"
       (selectedItemChange)="onSelectionChanged($event)"
+      itemTemplate="data"
     >
+      <div *dxTemplate="let item of 'data'">
+        <div>{{ item.programCode }} - {{ item.programName }}</div>
+      </div>
     </dx-select-box>
   </div>
 </div>
@@ -178,17 +182,72 @@
 </div>
 
 <div class="row" *ngIf="selectedProgram">
-  <div class="col-4">
+  <div class="col-5">
+    <span class="title">Available Credentials</span>
+    <dx-list
+      #availableCredentialsList
+      [dataSource]="availableCredentials"
+      [height]="250"
+      selectionMode="multiple"
+      [showSelectionControls]="true"
+      [searchEnabled]="true"
+      [searchExpr]="['name', 'credentialCode']"
+      searchMode="contains"
+      pageLoadMode="scrollBottom"
+      itemTemplate="data"
+    >
+      <div *dxTemplate="let item of 'data'">
+        <div>{{ item.credentialCode }} - {{ item.name }}</div>
+      </div>
+    </dx-list>
+  </div>
+  <div class="col align-self-center">
     <div>
-      <span class="title">Credentials</span>
+      <button
+        class="btn btn-outline-primary btn-block"
+        [disabled]="!availableCredentialsList.selectedItems.length"
+        (click)="addCredential(availableCredentialsList)"
+      >
+        <i class="fa fa-angle-double-right fa-2x" aria-hidden="true"></i>
+      </button>
     </div>
     <div>
+      <button
+        class="btn btn-outline-primary btn-block"
+        [disabled]="!currentCredentialsList.selectedItems.length"
+        (click)="removeCredential(currentCredentialsList)"
+      >
+        <i class="fa fa-angle-double-left fa-2x" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="col-5">
+    <div>
+      <span class="title">Current Credentials</span>
+    </div>
+    <dx-list
+      #currentCredentialsList
+      [dataSource]="selectedProgram.credentials"
+      [height]="250"
+      selectionMode="multiple"
+      [showSelectionControls]="true"
+      [searchEnabled]="true"
+      [searchExpr]="['name', 'credentialCode']"
+      searchMode="contains"
+      pageLoadMode="scrollBottom"
+      itemTemplate="data"
+    >
+      <div *dxTemplate="let item of 'data'">
+        <div>{{ item.credentialCode }} - {{ item.name }}</div>
+      </div>
+    </dx-list>
+    <!-- <div>
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let credential of selectedProgram.credentials">
           {{ credential.credentialCode }} - {{ credential.name }}
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </div>
 <div class="row">

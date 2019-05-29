@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using CourseCatalogDemo.Core.Dtos;
 using CourseCatalogDemo.Core.Models;
@@ -183,5 +184,46 @@ namespace CourseCatalogDemo.Web.Controllers.Api
 
             return Ok(dto);
         }
+
+        [HttpPost, Route("credentials/{programCode}")]
+        public async Task<object> AddCredential(string programCode, ProgramCredentialEditDto dto)
+        {
+            var program = _context.Programs.Include(c => c.Credentials)
+                .FirstOrDefault(x => x.ProgramCode == programCode);
+
+            var credential = await _context.Credentials.FirstOrDefaultAsync(x => x.Id == dto.CredentialId);
+
+            if (program == null) return NotFound();
+
+            program.Credentials.Add(new ProgramCredential()
+            {
+                ProgramId = dto.ProgramId,
+                CredentialId = dto.CredentialId, 
+                ModifiyUser = "mlawrence"
+            });
+
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpDelete, Route("credentials/{programCode}/{credentialCode}")]
+        public async Task<object> RemoveCredential(string programCode, string credentialCode)
+        {
+            var d = _context.Programs.Include(x => x.Credentials).FirstOrDefault(x =>
+                x.ProgramCode == programCode);
+
+            var c = _context.ProgramCredentials
+                .Where(x => x.Program.ProgramCode == programCode && x.Credential.CredentialCode == credentialCode);
+
+           
+            if (d == null) return NotFound();
+
+            _context.ProgramCredentials.RemoveRange(c);
+
+            
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
     }
 }

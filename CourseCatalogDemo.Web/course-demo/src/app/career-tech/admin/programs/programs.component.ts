@@ -3,7 +3,7 @@ import { CareerTechService } from 'src/app/shared/career-tech.service';
 import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
 import { ICourse } from 'src/app/models/course';
-import { IProgram, IProgramEdit } from 'src/app/models/program';
+import { IProgram, IProgramEdit, ICredential } from 'src/app/models/program';
 import { LookupService } from 'src/app/shared/lookup.service';
 import { CourseService } from 'src/app/shared/course.service';
 
@@ -23,6 +23,7 @@ export class ProgramsComponent implements OnInit {
   schoolYears: any;
   programTypes: { id: number; name: string; code: string; }[];
   clusters: any;
+  availableCredentials: ICredential[];
 
   constructor(
     private careerTech: CareerTechService,
@@ -34,6 +35,9 @@ export class ProgramsComponent implements OnInit {
     this.programTypes = this.lookup.getProgramTypes();
     this.careerTech.Clusters().subscribe(data => {
       this.clusters = data['data'];
+    });
+    this.careerTech.Credentials().subscribe(data => {
+      this.availableCredentials = data;
     });
 
     this.availableCourses = this.courseService.getCoursesApi();
@@ -89,6 +93,32 @@ export class ProgramsComponent implements OnInit {
         () => {
           const idx = this.courses.findIndex(x => x === item);
           this.courses.splice(idx, 1);
+        },
+        (error) => {
+          console.error('error', error);
+        }
+      );
+    });
+    list.selectedItems = [];
+  }
+
+  addCredential(list) {
+    list.selectedItems.forEach(item => {
+      this.careerTech.AddProgramCredential(this.selectedProgram, item).subscribe(
+        () => {
+          console.log('add', item);
+          this.selectedProgram.credentials.push(item);
+        });
+    });
+    list.selectedItems = [];
+  }
+
+  removeCredential(list) {
+    list.selectedItems.forEach(item => {
+      this.careerTech.RemoveProgramCredential(this.selectedProgram, item).subscribe(
+        () => {
+          const idx = this.selectedProgram.credentials.findIndex(x => x === item);
+          this.selectedProgram.credentials.splice(idx, 1);
         },
         (error) => {
           console.error('error', error);

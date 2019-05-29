@@ -14,6 +14,6 @@ namespace CourseCatalogDemo.Core.Models
 
         public bool IsReimbursable { get; set; }
 
-        public List<Program> Programs { get; set; }
+        public List<ProgramCredential> Programs { get; set; }
     }
 }
