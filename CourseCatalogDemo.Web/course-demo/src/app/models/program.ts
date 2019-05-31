@@ -38,3 +38,11 @@ export class ProgramCredential {
   programId: number;
   credentialId: number;
 }
+
+
+export interface ICredentialEdit {
+  id: number;
+  credentialCode: string;
+  name: string;
+  credentialTypeId: number;
+}

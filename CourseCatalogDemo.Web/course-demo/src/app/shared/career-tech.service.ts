@@ -7,7 +7,7 @@ import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
 
 import { ICluster } from '../models/cluster';
-import { IProgram, IProgramEdit, ProgramCourse, ICredential, ProgramCredential } from '../models/program';
+import { IProgram, IProgramEdit, ProgramCourse, ICredential, ProgramCredential, ICredentialEdit } from '../models/program';
 import { ICourse } from '../models/course';
 
 @Injectable({
@@ -61,10 +61,24 @@ export class CareerTechService {
     return this.http.get<ICredential[]>(`${this.testApi}/credentials`);
   }
 
+  CredentialEdit(credentialCode: string) {
+    return this.http.get<ICredentialEdit>(`${this.testApi}/credentials/${credentialCode}/edit`);
+  }
+
   SaveProgram(program) {
     return this.http
       .put<IProgram>(this.testApi + '/programs', program, this.options)
       .pipe(catchError(this.handleError));
+  }
+
+  SaveCredential(credential) {
+    return this.http
+      .put<IProgram>(this.testApi + '/credentials', credential, this.options)
+      .pipe(catchError(this.handleError));
+  }
+
+  Courses(programCode: string): Observable<ICourse[]> {
+    return this.http.get<ICourse[]>(`${this.testApi}/programs/${programCode}/courses`);
   }
 
   AddProgramCourse(program, course) {

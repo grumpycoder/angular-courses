@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using CourseCatalogDemo.Core.Dtos;
 using CourseCatalogDemo.Core.Models;
@@ -185,6 +184,27 @@ namespace CourseCatalogDemo.Web.Controllers.Api
             return Ok(dto);
         }
 
+        [HttpGet, Route("credentials/{credentialCode}/edit")]
+        public async Task<object> CredentialEdit(string credentialCode)
+        {
+            var credential = await _context.Credentials.FirstOrDefaultAsync(x => x.CredentialCode == credentialCode);
+
+            var dto = Mapper.Map<CredentialEditDto>(credential);
+            return Ok(dto);
+        }
+
+        [HttpPut, Route("credentials")]
+        public async Task<object> Put(CredentialEditDto dto)
+        {
+            var credential = await _context.Credentials.FindAsync(dto.Id);
+
+            Mapper.Map(dto, credential);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(dto);
+        }
+
         [HttpPost, Route("credentials/{programCode}")]
         public async Task<object> AddCredential(string programCode, ProgramCredentialEditDto dto)
         {
@@ -198,7 +218,7 @@ namespace CourseCatalogDemo.Web.Controllers.Api
             program.Credentials.Add(new ProgramCredential()
             {
                 ProgramId = dto.ProgramId,
-                CredentialId = dto.CredentialId, 
+                CredentialId = dto.CredentialId,
                 ModifiyUser = "mlawrence"
             });
 
@@ -215,12 +235,12 @@ namespace CourseCatalogDemo.Web.Controllers.Api
             var c = _context.ProgramCredentials
                 .Where(x => x.Program.ProgramCode == programCode && x.Credential.CredentialCode == credentialCode);
 
-           
+
             if (d == null) return NotFound();
 
             _context.ProgramCredentials.RemoveRange(c);
 
-            
+
             await _context.SaveChangesAsync();
             return Ok();
         }

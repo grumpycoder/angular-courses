@@ -31,19 +31,14 @@ export class ProgramListComponent implements OnInit {
   }
 
   onSelectionChanged(program) {
-    console.log('program selected', program);
     this.selectedProgram = program;
     if (program == null) {
       this.courses = [];
       return;
     }
 
-    this.careerTech.getCourses(program.programCode).subscribe(data => {
-      console.log('data', data);
-
+    this.careerTech.Courses(program.programCode).subscribe(data => {
       this.courses = data;
-      console.log('course', this.courses);
-
     });
   }
 }

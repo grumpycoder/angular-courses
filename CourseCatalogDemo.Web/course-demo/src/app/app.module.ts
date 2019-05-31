@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+
 import {
-  DxButtonModule,
   DxDataGridModule,
   DxBulletModule,
   DxTemplateModule,
@@ -12,27 +13,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    DashboardComponent
-  ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     SharedModule,
-    // FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    DxButtonModule,
     DxDataGridModule,
     DxTemplateModule,
     DxBulletModule,
     DxListModule,
+  ],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    DashboardComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

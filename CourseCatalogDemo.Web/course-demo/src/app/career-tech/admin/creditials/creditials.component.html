@@ -1,3 +1,115 @@
-<p>
-  creditials works!
-</p>
+<div class="row">
+  <div class="col-4">
+    <dx-select-box
+      [dataSource]="data"
+      placeholder="Choose Credential"
+      displayExpr="name"
+      [showClearButton]="true"
+      [searchEnabled]="true"
+      [searchExpr]="['name', 'credentialCode']"
+      (selectedItemChange)="onSelectionChanged($event)"
+      itemTemplate="data"
+    >
+      <div *dxTemplate="let item of 'data'">
+        <div>{{ item.credentialCode }} - {{ item.name }}</div>
+      </div>
+    </dx-select-box>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div *ngIf="credential">
+      <form novalidate #credentialForm="ngForm" (ngSubmit)="onSubmit(credentialForm.value)">
+        <fieldset>
+          <div class="form-group row">
+            <label for="credentialName" class="col-md-2 col-form-label">Name</label>
+            <div class="col-md-8">
+              <input
+                type="text"
+                class="form-control"
+                id="credentialName"
+                name="credentialName"
+                placeholder="Credential Name (required)"
+                [(ngModel)]="credential.name"
+                minlength="6"
+                #credentialName="ngModel"
+              />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="credentialCode" class="col-md-2 col-form-label">Credential Code</label>
+            <div class="col-md-8">
+              <input
+                type="text"
+                class="form-control"
+                id="credentialCode"
+                name="credentialCode"
+                placeholder="Credential Code (required)"
+                [(ngModel)]="credential.credentialCode"
+                minlength="6"
+                #credentialCode="ngModel"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="clusterId" class="col-md-2 col-form-label">Credential Type</label>
+            <div class="col-md-8">
+              <select
+                class="form-control"
+                [(ngModel)]="credential.credentialTypeId"
+                name="credentialTypeId"
+                #clusterId="ngModel"
+              >
+                <option
+                  *ngFor="let credentialType of credentialTypes"
+                  [value]="credentialType.id"
+                  >{{ credentialType.name }}</option
+                >
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group-row">
+            <!-- <button
+              type="button"
+              class="btn btn-outline-primary"
+              data-toggle="button"
+              aria-pressed="false"
+              autocomplete="off"
+              id="isReimbursable"
+              name="isReimbursable"
+              [(ngModel)]="credential.isReimbursable"
+              #isReimbursable="ngModel"
+            >
+              Single toggle
+            </button> -->
+          </div>
+          <div class="form-group row">
+            <label class="form-check-label col-md-2" for="defaultCheck1">
+              Reimbursable
+            </label>
+            <div class="col-md-8">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="isReimbursable"
+                  name="isReimbursable"
+                  [(ngModel)]="credential.isReimbursable"
+                  #isReimbursable="ngModel"
+                />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <button class="btn btn-primary" type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<pre>
+  {{ credential | json }}
+</pre>

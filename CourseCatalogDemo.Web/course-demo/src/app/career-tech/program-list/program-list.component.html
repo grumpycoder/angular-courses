@@ -5,41 +5,62 @@
   <div class="card-body">
     <div class="row">
       <div class="col-4">
-        <span class="title">Programs</span>
-        <dx-select-box
-          [dataSource]="data"
-          placeholder="Choose Program"
-          displayExpr="programName"
-          [showClearButton]="true"
-          [searchEnabled]="true"
-          [searchExpr]="['clusterName', 'programName']"
-          [grouped]="true"
-          (selectedItemChange)="onSelectionChanged($event)"
-        >
-        </dx-select-box>
-        <span *ngIf="selectedProgram">
-          In-Service {{ selectedProgram.beginYear }} - {{ selectedProgram.endYear }}
-        </span>
-      </div>
-      <div class="col-8">
-        <dx-list [items]="courses" height="100%">
-          <div *dxTemplate="let item of 'item'">
-            <div>
-              <div>{{ item.name }}</div>
-              <div>{{ item.courseCode }}</div>
-              <div>Class Type:{{ item.classType }}</div>
-              <div>Course Type:{{ item.courseType }}</div>
-              <div>Credit Type:{{ item.creditType }}</div>
-              <div>Service Years: {{ item.beginYear }}-{{ item.endYear }}</div>
-            </div>
-          </div>
-        </dx-list>
+        <fieldset>
+          <legend>Programs</legend>
 
-        <!-- <ul class="list-group" *ngIf="courses">
-          <li class="list-group-item" *ngFor="let course of courses">
-            {{ course.name }}
-          </li>
-        </ul> -->
+          <dx-select-box
+            [dataSource]="data"
+            placeholder="Choose Program"
+            displayExpr="programName"
+            [showClearButton]="true"
+            [searchEnabled]="true"
+            [searchExpr]="['clusterName', 'programName']"
+            [grouped]="true"
+            (selectedItemChange)="onSelectionChanged($event)"
+            itemTemplate="data"
+            style="margin:1px"
+          >
+            <div *dxTemplate="let item of 'data'">
+              <div>{{ item.programCode }} - {{ item.programName }}</div>
+            </div>
+          </dx-select-box>
+        </fieldset>
+
+        <fieldset *ngIf="selectedProgram">
+          <legend>Program Information</legend>
+          <dl class="row">
+            <dt class="col-4">Cluster Name</dt>
+            <dd class="col-8">{{ selectedProgram.clusterName }}</dd>
+            <dt class="col-4">Cluster Code</dt>
+            <dd class="col-8">{{ selectedProgram.clusterCode }}</dd>
+            <dt class="col-4">Program Name</dt>
+            <dd class="col-8">{{ selectedProgram.programName }}</dd>
+            <dt class="col-4">Program Code</dt>
+            <dd class="col-8">{{ selectedProgram.programCode }}</dd>
+            <dt class="col-4">Begin Year</dt>
+            <dd class="col-8">{{ selectedProgram.beginYear }}</dd>
+            <dt class="col-4">End Year</dt>
+            <dd class="col-8">{{ selectedProgram.endYear }}</dd>
+          </dl>
+        </fieldset>
+      </div>
+      <div class="col-8" *ngIf="courses">
+        <fieldset>
+          <legend>Courses</legend>
+
+          <dx-list [items]="courses" height="100%">
+            <div *dxTemplate="let item of 'item'">
+              <div>
+                <div>{{ item.name }}</div>
+                <div>{{ item.courseCode }}</div>
+                <div>Class Type:{{ item.classType }}</div>
+                <div>Course Type:{{ item.courseType }}</div>
+                <div>Credit Type:{{ item.creditType }}</div>
+                <div>Service Years: {{ item.beginYear }}-{{ item.endYear }}</div>
+              </div>
+            </div>
+          </dx-list>
+        </fieldset>
       </div>
     </div>
   </div>
@@ -48,7 +69,6 @@
   </div>
 
   <div class="col-12">
-    courses here
     <code>
       <pre>
             {{ selectedProgram | json }}

@@ -41,7 +41,17 @@ export class LookupService {
   getProgramTypes() {
     return PROGRAMTYPES;
   }
+
+  getCredentialTypes() {
+    return CREDENTIALSTYPES;
+  }
 }
+
+const CREDENTIALSTYPES = [
+  { id: 1, name: 'CRI', code: '001' },
+  { id: 2, name: 'Stackable', code: '002' },
+  { id: 3, name: 'Local', code: '003' }
+];
 
 const PROGRAMTYPES = [
   { id: 1, name: 'CO-OP', code: '001' },

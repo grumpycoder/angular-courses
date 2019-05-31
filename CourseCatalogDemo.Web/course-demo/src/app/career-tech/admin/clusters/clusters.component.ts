@@ -21,23 +21,14 @@ export class ClustersComponent implements OnInit {
   schoolYears: { id: number; year: number; }[];
 
 
-  constructor(private service: CareerTechService, private lookup: LookupService) { }
+  constructor(private careerTech: CareerTechService, private lookup: LookupService) { }
 
   ngOnInit() {
     this.clusterTypes = this.lookup.getClusterTypes();
     this.schoolYears = this.lookup.getServiceYears();
-    this.service.Clusters().subscribe(data => {
+    this.careerTech.Clusters().subscribe(data => {
       this.clusters = data['data'];
-      console.log(this.clusters);
-
     });
-
-    // this.service.getPrograms().subscribe(data => {
-    //   this.programs = data;
-    // });
-    // this.service.getClusters().subscribe(data => {
-    //   this.clusters = data['data'];
-    // });
   }
 
   onSelectionChanged(cluster) {
@@ -45,14 +36,14 @@ export class ClustersComponent implements OnInit {
       this.cluster = null;
     } else {
       this.selectedCluster = cluster;
-      this.service.ClusterEdit(cluster).subscribe(data => {
+      this.careerTech.ClusterEdit(cluster).subscribe(data => {
         this.cluster = data;
       });
     }
   }
 
   onSubmit(formValues) {
-    this.service.SaveCluster(this.cluster).subscribe(() => {
+    this.careerTech.SaveCluster(this.cluster).subscribe(() => {
     });
   }
 

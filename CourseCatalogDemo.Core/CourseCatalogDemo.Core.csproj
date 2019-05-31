@@ -56,6 +56,7 @@
     <Compile Include="Dtos\CourseDto.cs" />
     <Compile Include="Dtos\CourseEditDto.cs" />
     <Compile Include="Dtos\CredentialDto.cs" />
+    <Compile Include="Dtos\CredentialEditDto.cs" />
     <Compile Include="Dtos\ProgramCourseEditDto.cs" />
     <Compile Include="Dtos\ProgramCredentialEditDto.cs" />
     <Compile Include="Dtos\ProgramDto.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Models\ProgramType.cs" />
     <Compile Include="Models\SchoolYear.cs" />
     <Compile Include="Models\SubjectArea.cs" />
+    <Compile Include="Profiles\CredentialProfile.cs" />
     <Compile Include="Profiles\ClusterProfile.cs" />
     <Compile Include="Profiles\CourseProfile.cs" />
     <Compile Include="Profiles\ProgramProfile.cs" />
