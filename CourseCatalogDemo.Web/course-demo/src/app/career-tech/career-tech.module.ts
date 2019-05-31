@@ -13,7 +13,6 @@ import { CareerTechAdminComponent } from './admin/career-tech-admin.component';
 import { ProgramsComponent } from './admin/programs/programs.component';
 import { CreditialsComponent } from './admin/creditials/creditials.component';
 import { FormsModule } from '@angular/forms';
-import { MatSlideToggle, MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 const routes: Routes = [
 
@@ -58,7 +57,7 @@ const routes: Routes = [
     DxSelectBoxModule,
     DxListModule,
     DxTextBoxModule,
-    DxTemplateModule,
+    DxTemplateModule
   ],
   declarations: [
     ProgramListComponent,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CareerTechService } from 'src/app/shared/career-tech.service';
 import DataSource from 'devextreme/data/data_source';
 import ArrayStore from 'devextreme/data/array_store';
@@ -6,13 +6,15 @@ import { ICourse } from 'src/app/models/course';
 import { IProgram, IProgramEdit, ICredential } from 'src/app/models/program';
 import { LookupService } from 'src/app/shared/lookup.service';
 import { CourseService } from 'src/app/shared/course.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-programs',
   templateUrl: './programs.component.html',
   styles: []
 })
-export class ProgramsComponent implements OnInit {
+export class ProgramsComponent implements OnInit, OnDestroy {
   programs: any;
   datasource: any;
   data: DataSource;
@@ -25,6 +27,8 @@ export class ProgramsComponent implements OnInit {
   clusters: any;
   availableCredentials: ICredential[];
 
+  private subscription: Subscription;
+
   constructor(
     private careerTech: CareerTechService,
     private courseService: CourseService,
@@ -33,16 +37,16 @@ export class ProgramsComponent implements OnInit {
   ngOnInit() {
     this.schoolYears = this.lookup.getServiceYears();
     this.programTypes = this.lookup.getProgramTypes();
-    this.careerTech.Clusters().subscribe(data => {
+    this.subscription = this.careerTech.Clusters().subscribe(data => {
       this.clusters = data['data'];
     });
-    this.careerTech.Credentials().subscribe(data => {
+    this.subscription = this.careerTech.Credentials().subscribe(data => {
       this.availableCredentials = data;
     });
 
     this.availableCourses = this.courseService.getCoursesApi();
 
-    this.careerTech.Programs().subscribe(data => {
+    this.subscription = this.careerTech.Programs().subscribe(data => {
       this.data = new DataSource({
         store: new ArrayStore({
           data: data,
@@ -51,6 +55,14 @@ export class ProgramsComponent implements OnInit {
       });
 
     });
+
+
+  }
+
+  ngOnDestroy() {
+    console.log('destroying subscriptions');
+
+    this.subscription.unsubscribe();
   }
 
   onSelectionChanged(program) {

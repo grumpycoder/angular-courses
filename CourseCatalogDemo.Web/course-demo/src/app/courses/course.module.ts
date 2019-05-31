@@ -4,6 +4,7 @@ import { CourseListComponent } from './course-list.component';
 import { CourseEditComponent } from './course-edit/course-edit.component';
 import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { RouterModule, Routes } from '@angular/router';
+
 import {
   DxButtonModule,
   DxDataGridModule,

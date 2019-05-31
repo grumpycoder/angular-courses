@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CareerTechService } from 'src/app/shared/career-tech.service';
 import ArrayStore from 'devextreme/data/array_store';
 import DataSource from 'devextreme/data/data_source';
@@ -8,7 +8,7 @@ import { ICourse } from 'src/app/models/course';
   templateUrl: './program-list.component.html',
   styles: []
 })
-export class ProgramListComponent implements OnInit {
+export class ProgramListComponent implements OnInit, OnDestroy {
   pageTitle = 'Program Catalog';
   programs: any;
   datasource: any;
@@ -28,6 +28,10 @@ export class ProgramListComponent implements OnInit {
         group: 'clusterName'
       });
     });
+  }
+  ngOnDestroy() {
+    //this.careerTech.unsubscribe();
+
   }
 
   onSelectionChanged(program) {
